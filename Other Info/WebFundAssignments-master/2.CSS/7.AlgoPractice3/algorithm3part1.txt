@@ -1,0 +1,9 @@
+Challenge 1.
+function a(x,y){
+  return 5;
+}
+console.log(a(5,5))
+Prediction: 
+Output: 
+
+Challenge 2.

@@ -1,0 +1,1 @@
+## Very similar to the Algorithm assignments, build a .js file to write functions that solve the challenges. You will want to test your code at jsbin.com again.  These challenges are very difficult at times. Do your best. If you only finish half of them, that's okay!

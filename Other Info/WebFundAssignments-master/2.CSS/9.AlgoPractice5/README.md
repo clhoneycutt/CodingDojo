@@ -1,0 +1,1 @@
+## Build out a .js file on your own this time and call it algorithm5.js  In that file, code out your functions to solve the challenges.  #4 is a tough one again! Do your best!

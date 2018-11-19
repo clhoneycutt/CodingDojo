@@ -1,0 +1,35 @@
+﻿List of commands used in Terminal: Assignment I
+
+cd /home/clhon/Desktop/
+
+mkdir test
+
+touch index.html
+
+touch styles.css
+
+touch command.txt
+
+mv index.html index_2.html
+
+cd ..
+
+mkdir destination
+
+cd test
+
+mv index_2.html /home/clhon/Desktop/destination/index_2.html
+
+rm styles.css
+
+ls -l
+
+cd ..
+
+cd destination
+
+ls -l
+
+cd ..
+
+rm -rf destination

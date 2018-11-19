@@ -1,0 +1,1 @@
+## This assignment gives you images to incorporate on the page. We'll build the file structure for you on this one.

@@ -1,0 +1,84 @@
+/* DEBUG / RESET / CONTAINER */
+/*--------------------------------------------------------------*/
+*{
+    margin: 0px;
+    padding: 0px;
+    /* outline: 1px solid red; */
+}
+
+.container{
+    width: 970px;
+    margin: 0px auto;
+    padding: 0px 5px;
+    background-color: rgb(20,20,20);
+    color: white;
+}
+
+
+/* SINGLE ATTRIBUTE CLASSES */
+/*--------------------------------------------------------------*/
+
+#farright{
+    border-right: none;
+}
+
+
+/* HEADER */
+/*--------------------------------------------------------------*/
+
+.header{
+    background-color: #1a1a1a;
+    padding: 15px 15px 15px 5px;
+    color: white;
+    border-left: 1px solid #161616;
+    border-right: 1px solid #161616;
+}
+.header h4{
+    background-color: rgb(26,26,26);
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 573px;    
+}
+.navBar{
+    list-style-type: none;
+    background-image: linear-gradient(rgb(74,74,74), rgb(41,41,41))
+}
+.navBar li{
+    display: inline-block;
+    padding: 0px 15px;
+    margin: 10px 0px;
+    border-right: 2px inset rgb(70,70,70);
+}
+.navBar a{
+    text-decoration: none;
+    color: white;
+}
+
+
+/* CONTENT1 */
+/*--------------------------------------------------------------*/
+
+
+#mainimg{
+    width: 970px;
+    border-bottom: 4px solid rgb(59,59,59);
+}
+.content1{
+    display: inline-block;
+    width: 234px;
+    margin: 50px 0px 50px 5px;
+}
+.content1 img{
+    width: 30px;
+}
+.content1 
+
+
+
+/* CONTENT2 */
+/*--------------------------------------------------------------*/
+
+
+
+
+

@@ -1,0 +1,1 @@
+## Okay, you're on your own to get your html file and jQuery script included on it as well as a javascript file similar to the jQuery Functions assignment.  Feel free to use the included image for the assignment.

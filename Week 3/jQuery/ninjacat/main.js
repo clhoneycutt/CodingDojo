@@ -4,7 +4,5 @@ $(document).ready(function(){
         var altImage = $(this).attr('data-alt-source');
         $(this).attr('src',altImage)
         $(this).attr('data-alt-source', currentImage)
-        // if ()
-        // $(this).attr()
     });
 });

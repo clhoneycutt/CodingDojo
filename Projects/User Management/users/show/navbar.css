@@ -1,0 +1,28 @@
+/* NAVBAR */
+/* ----------------------------------------------------------- */
+
+.navbar{
+    background-color: #011627;
+    width: 100%;
+    color: #FF9F1C;
+}
+.links{
+    display: inline-block;
+    margin: 15px 0px 15px 150px;
+}
+.links li{
+    display: inline-block;
+}
+.links a{
+    text-decoration: none;
+    color: #FF9F1C;
+    margin: 0px 0px 0px 15px;
+}
+#signin{
+    display: inline-block;
+    margin: 22px 150px 0px 0px;
+    position: absolute;
+    right: 0;
+    text-decoration: none;
+    color: #FF9F1C;
+}

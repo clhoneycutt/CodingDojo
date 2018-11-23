@@ -1,0 +1,13 @@
+/* RESET / DEBUG / CONTAINER */
+/* ----------------------------------------------------------- */
+
+*{
+    margin: 0px;
+    padding: 0px;
+    outline: 1px solid red;
+}
+
+.container{
+    margin: 0px 150px;
+    min-height: 750px;
+}

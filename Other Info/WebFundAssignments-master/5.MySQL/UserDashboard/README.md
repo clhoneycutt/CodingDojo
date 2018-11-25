@@ -1,1 +1,0 @@
-## This is an optional assignment, but if you take it on, upload your exported diagram (.mwb file, a screenshot, whichever you prefer) to the platform

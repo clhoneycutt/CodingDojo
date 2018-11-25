@@ -1,1 +1,0 @@
-## Make sure to mimic what you did in the Portfolio folder.  Build an images/ folder and store the images there.  Don't forget your index.html and style.css file. You got this.

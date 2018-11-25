@@ -1,1 +1,0 @@
-## Upload your exported diagram (.mwb file, a screenshot, whichever you prefer) to the platform

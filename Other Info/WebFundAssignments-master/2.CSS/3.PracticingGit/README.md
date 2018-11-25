@@ -1,1 +1,0 @@
-## Build out a .txt file and type in the commands that you used to work with terminal/CMD/GitBash and Git.

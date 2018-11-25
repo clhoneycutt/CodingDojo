@@ -1,1 +1,0 @@
-## Upload your queries either in a .txt file or an exported SQL file

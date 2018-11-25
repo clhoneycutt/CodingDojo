@@ -1,1 +1,0 @@
-## With this assignment, we've created an algorithm1.txt file for you already. You can test the Javascript code from the platform and test your predictions at JSBin.com

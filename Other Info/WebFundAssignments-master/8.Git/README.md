@@ -1,1 +1,0 @@
-## The Git content is all optional!

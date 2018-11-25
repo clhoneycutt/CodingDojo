@@ -1,1 +1,0 @@
-## The APIs and AJAX content is all optional!

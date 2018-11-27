@@ -1,0 +1,61 @@
+pip install Django==1.11.9
+
+** Installs a specific version of Django
+
+-----------------------------------
+
+pip list
+
+** shows a list of all available libraries in this environment
+
+-----------------------------------
+
+deactivate (This will deactivate your virtual environment)
+
+-----------------------------------
+
+pip3 list (How is the result different from when you ran pip list with the virtualenv activated? Hint, you should not have as many things listed when the virtualenv is deactivated. If your results are the same, go back and figure out what went wrong.)
+
+** shows a list of all available libraries with the installed version of python
+
+-----------------------------------
+
+source myEnvironments/py3Env/bin/activate (Adjust the path as needed to re-activate the virtualenv; for windows call myEnvironments/py3Env/Scripts/activate)
+
+** activates a specific environment.
+
+-----------------------------------
+
+pip install Django==1.11.9 (We know you already ran this one. What information do you see returned in terminal after this command?)
+
+** it returns that this version of django is already installed (requirement already satisfied) as well as returning that the requirement of django, pytz is already in place.
+
+-----------------------------------
+
+pip freeze (What's the difference between freeze and list?)
+
+** freeze gives an output that is in requirements.txt format. list just shows the packages that are installed.
+
+-----------------------------------
+
+First cd into your Desktop directory (cd ~/Desktop), then run this command: pip freeze > requirements.txt. What do you see when you ls? What's inside this file?
+
+** this command creates a requirements.txt file that holds all the dependencies required for your environment / project.  It has to be a specific format.
+
+-----------------------------------
+
+pip uninstall Django
+
+** uninstall django from both bin and lib directories in your current environment.
+
+-----------------------------------
+
+pip show Django
+
+** does nothing because django is now uninstalled. If I reinstall django and then run this command, it returns a summary of the package.  name, version, summary, homepage, author, requirements, etc.
+
+-----------------------------------
+
+pip search Flask This one might take a moment to execute.
+
+** shows all packages available through pip that start with flask.

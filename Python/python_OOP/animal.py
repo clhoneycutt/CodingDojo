@@ -39,6 +39,7 @@ class dragon(animal):
     def display_health(self):
         super().display_health()
         print("I am a Dragon")
+        return self
 
 
 # fido = dog('Fido')

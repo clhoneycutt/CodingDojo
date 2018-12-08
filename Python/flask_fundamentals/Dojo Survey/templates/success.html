@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Success!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}" />
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        .container{
+            width: 325px;
+            min-height: 250px;
+            margin: 0px auto;
+            padding: 25px;
+            border: 1px solid black;
+        }
+        .container h2{
+            text-decoration: underline;
+        }
+        .container div{
+            margin-left: 10px;
+            display: inline-block;
+        }
+        .form{
+            float: right;
+            padding-right: 50px;
+        }
+        button{
+            float: right;
+            display: block;
+            margin: 125px 25px 0px 0px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Submitted Info</h2>
+        <div>
+            <p>Name:</p>
+            <p>Dojo Location:</p>
+            <p>Favorite Language:</p>
+            <p>Comment:</p>
+        </div>
+        <div class="form">
+            <p>{{ request.form['name'] }}</p>
+            <p>{{ request.form['location'] }}</p>
+            <p>{{ request.form['favlang'] }}!!!</p>
+            <p>{{ request.form['comments'] }}</p>
+        </div>
+        <form action="{{ url_for('index') }}" method="post">
+            <button>Go Back</button>
+        </form>
+    </div>
+
+</body>
+</html>

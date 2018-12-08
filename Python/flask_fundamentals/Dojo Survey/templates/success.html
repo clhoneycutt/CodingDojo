@@ -51,7 +51,7 @@
             <p>{{ request.form['favlang'] }}!!!</p>
             <p>{{ request.form['comments'] }}</p>
         </div>
-        <form action="{{ url_for('index') }}" method="post">
+        <form action="/" method="get">
             <button>Go Back</button>
         </form>
     </div>

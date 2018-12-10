@@ -1,0 +1,44 @@
+/* Header */
+/* ============================================== */
+
+.yourgold{
+    margin: 15px 0px 15px 150px;
+    display: inline-block;
+}
+#goldamt{
+    display: inline;
+}
+.gold{
+    margin-left: 15px;
+}
+
+/* Main Body */
+/* ============================================== */
+
+.card-body{
+    text-align: center;
+}
+.card{
+    width: 24.7%;
+}
+.card-text{
+    min-height: 75px;
+}
+input{
+    width: 100px;
+
+}
+.win{
+    color: green;
+}
+.loss{
+    color: red;
+}
+
+/* Activity Log */
+/* ============================================== */
+
+
+textarea{
+    resize: none;
+}

@@ -15,7 +15,6 @@ def index():
     
     if 'answer' not in session:
         session['answer'] = randNum
-        print(session['answer'])
     return render_template('index.html')
 
 @app.route('/guess', methods=['POST'])

@@ -18,7 +18,6 @@ def index():
 def double():
     session['total_visits'] += 1
     print('\n','='*50,'\n Double Visit!  Adding 1 extra to visit count\n','='*50,'\n')
-    session['double'] = True
     return redirect('/')
 
 @app.route('/clear', methods=['post'])

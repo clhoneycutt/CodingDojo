@@ -64,6 +64,9 @@
                 <div class="container result">
                     {% for dict in session['activities']: %}<p class="{{ dict['color'] }}">{{ dict['message'] -}}</p>{% endfor %}
                 </div>
+                <form action="/clear" method="post">
+                    <input type="submit" class="btn btn-primary" value="Quit" style="margin-top:15px;float:right;">
+                </form>
             </div>
         </div>          
     </body>

@@ -41,7 +41,11 @@ def process():
         currActivity = f"Entered a casino and lost {abs(difference)} golds... Ouch.. ({timestamp})"
         currColor = "loss"
     session['activities'].insert(0, {"message": currActivity, "color": currColor})
-    print(session['activities'])
+    return redirect('/')
+
+@app.route('/clear', methods=['post'])
+def clear():
+    session.clear()
     return redirect('/')
     
 

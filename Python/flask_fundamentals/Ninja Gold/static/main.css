@@ -1,15 +1,16 @@
+*{
+    padding: 0px;
+}
+
 /* Header */
 /* ============================================== */
 
 .yourgold{
-    margin: 15px 0px 15px 150px;
+    margin-top: 15px;
     display: inline-block;
 }
 #goldamt{
     display: inline;
-}
-.gold{
-    margin-left: 15px;
 }
 
 /* Main Body */
@@ -39,6 +40,8 @@ input{
 /* ============================================== */
 
 
-textarea{
-    resize: none;
+.result{
+    border: 2px solid black;
+    height: 200px;
+    overflow-y: scroll;
 }

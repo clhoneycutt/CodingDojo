@@ -18,7 +18,7 @@ def process():
         session['activities'] = []
     goldBeforeProcess = session['goldamt']
     
-    # Determine building and random win/loss
+    # Determine building for income rate and random win/loss
     if request.form['building'] == 'farm':
         session['goldamt'] += random.randrange(10,21)
     elif request.form['building'] == 'cave':

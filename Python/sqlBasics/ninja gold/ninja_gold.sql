@@ -5,7 +5,7 @@
 
 -- Examples of adding
 -- INSERT INTO users (first_name, last_name, email, pw_hash, created_at)
--- VALUES ("Chris", "D", "cdavila@codingdojo.com", "password", NOW());
+-- VALUES ("Wes", "H", "wharper@codingdojo.com", "password", NOW());
 
 -- INSERT INTO locations (name, min_gold, max_gold, created_at)
 -- VALUES("Cave", 5, 10, NOW());
@@ -28,15 +28,10 @@
 
 
 -- Selects all from tables
-SELECT * FROM users;
-SELECT * FROM locations;
-SELECT * FROM activities;
+-- SELECT * FROM users;
+-- SELECT * FROM locations;
+-- SELECT * FROM activities;
 -- ---------------------------------
-
-
-SELECT activities.gold_amount, activities.created_at, locations.name FROM activities
-  JOIN locations ON activities.location_id = locations.id
-  WHERE activities.user_id = 1;
 
 
 

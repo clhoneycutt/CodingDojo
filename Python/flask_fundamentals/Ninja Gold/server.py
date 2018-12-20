@@ -1,8 +1,11 @@
 from flask import Flask, render_template, request, redirect, session
 import random
 import datetime
+from mysqlconnection import connectToMySQL
 app = Flask(__name__)
 app.secret_key = "SuPeRsEcReTkEy"
+mysql = connectToMySQL('ninja_gold')
+
 
 @app.route('/')
 

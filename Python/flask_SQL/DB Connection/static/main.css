@@ -1,0 +1,10 @@
+*{
+    /* outline: 1px solid red; */
+}
+input{
+    display: inline-block;
+}
+.container{
+    width: 500px;
+    margin: 0px auto;
+}

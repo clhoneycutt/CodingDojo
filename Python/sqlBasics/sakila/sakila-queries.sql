@@ -58,13 +58,24 @@
 
 -- 7. What query would you run to get all drama films with a rental rate of 2.99? Your query should return film title, description, release year, rating, special features, and genre (category).
 
-SELECT film.title, film.description, film.release_year, film.rating, film.special_features, category.name
-FROM film
-JOIN film_category ON film.film_id = film_category.film_id
-JOIN category ON film_category.category_id = category.category_id
-WHERE film.rental_rate = 2.99 AND category.name = "drama";
+-- SELECT film.title, film.description, film.release_year, film.rating, film.special_features, category.name
+-- FROM film
+-- JOIN film_category ON film.film_id = film_category.film_id
+-- JOIN category ON film_category.category_id = category.category_id
+-- WHERE film.rental_rate = 2.99 AND category.name = "drama";
 
 
 -- 8. What query would you run to get all the action films which are joined by SANDRA KILMER? Your query should return film title, description, release year, rating, special features, genre (category), and actor's first name and last name.
+
+-- SELECT film.title, film.description, film.release_year, film.rating, film.special_features, category.name, CONCAT(actor.first_name, ' ', actor.last_name) AS actor_name
+-- FROM film
+-- JOIN film_category ON film.film_id = film_category.film_id
+-- JOIN category ON film_category.category_id = category.category_id
+-- JOIN film_actor ON film.film_id = film_actor.film_id
+-- JOIN actor ON film_actor.actor_id = actor.actor_id
+-- WHERE actor.first_name = "Sandra" AND actor.last_name = "Kilmer";
+
+
+
 
 

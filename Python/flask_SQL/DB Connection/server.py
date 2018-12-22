@@ -7,6 +7,7 @@ app = Flask(__name__)
 def index():
     # invoke the connectToMySQL function and pass it the name of the database we're using
     # connectToMySQL returns an instance of MySQLConnection, which we will store in the variable 'mysql'
+    
     mysql = connectToMySQL('mydb')
     all_friends = mysql.query_db("SELECT * FROM users")
     print("\nAll the friends: \n")

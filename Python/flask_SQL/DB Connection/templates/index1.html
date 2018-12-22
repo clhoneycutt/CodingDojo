@@ -9,25 +9,21 @@
 <body>
     <div class="container">
         <h1>These are all my friends</h1>
-        <table class="table table-bordered">
-            <thead class="thead-dark">
-              <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Occupation</th>
-              </tr>
-            </thead>
-            <tbody>
-                {% for friend in friends %}
-                    <tr>
-                        <th scope="row">{{ friend['first_name'] }}</th>
-                        <td>{{ friend['last_name'] }}</td>
-                        <td>{{ friend['occupation'] }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-          </table>
-          
+        <div class="friend_list">
+            {% for friend in friends %}
+            <div class ="friendLabels">
+                <p>First Name:</p>    
+                <p>Last Name:</p>
+                <p>Occupation:</p>
+            </div>
+            <div class="friends">
+                <p>{{ friend['first_name'] }}</p>
+                <p>{{ friend['last_name'] }}</p>
+                <p>{{ friend['occupation'] }}</p>
+            </div>
+            <hr>
+            {% endfor %}
+        </div>
         <h1>Add a friend</h1>
         <form action="/create_friend" method="POST">
             <div class="form-group">

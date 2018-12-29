@@ -11,11 +11,11 @@
 
 -- 2. What query would you run to get all comedy films? Your query should return film title, description, release year, rating, special features, and genre (category).
 
--- SELECT film.title, film.description, film.release_year,film.rating,film.special_features,category.name
--- FROM film
--- JOIN film_category ON film.film_id = film_category.film_id
--- JOIN category ON film_category.category_id = category.category_id
--- WHERE category.name = "Comedy";
+SELECT film.title, film.description, film.release_year,film.rating,film.special_features,category.name
+FROM film
+JOIN film_category ON film.film_id = film_category.film_id
+JOIN category ON film_category.category_id = category.category_id
+WHERE category.name = "Comedy";
 
 
 -- 3. What query would you run to get all the films joined by actor_id=5? Your query should return the actor id, actor name, film title, description, and release year.

@@ -4,7 +4,7 @@ import datetime
 from mysqlconnection import connectToMySQL
 app = Flask(__name__)
 app.secret_key = "SuPeRsEcReTkEy"
-mysql = connectToMySQL('ninja_gold')
+# mysql = connectToMySQL('ninja_gold')
 
 
 @app.route('/')

@@ -12,6 +12,7 @@
 
 -- INSERT INTO activities (gold_amount, created_at, user_id, location_id)
 -- VALUES(-5, NOW(), 5, 4);
+
 -- ---------------------------------
 
 -- Example of updating

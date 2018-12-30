@@ -5,13 +5,30 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Title</title>
+    <title>Customers and Leads</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <div class="container">
+        <div id="daterange" class="float-right">
+            <h4>Date Range of leads generated</h4>
+            <p>Test ranges: 2015-06-01 thru 2015-06-31 and 2015-08-01 thru 2015-08-31</p> <!-- for testing purposes. -->
+            <form action="rangefinder" method='post'>
+                <input type="text" name='date_from' class="form-control d-inline" id="date_from" ng-required="true" placeholder="{{ first_date }}" >
+                <input type="text" name='date_to' class="form-control d-inline" id="date_to" ng-required="true" placeholder="{{ second_date }}" >
+                <input class="float-left" type="submit" name="update" value="Update">
+            </form>
+            <form action="clear" method='post'>
+                <input class="float-right" type="submit" name="clear" value="Clear Filters">
+            </form>
+        </div>
         <h3>List of all customers and # of leads</h3>
         <table class="table table-bordered">
             <thead>
@@ -21,12 +38,21 @@
                 </tr>
             </thead>
             <tbody>
-                {% for lead in leads: %}
-                <tr>
-                    <td>{{ lead['cust_name'] }}</td>
-                    <td>{{ lead['num_leads'] }}</td>
-                </tr>
-                {% endfor %}
+                {% if 'range' not in session: %}
+                    {% for lead in leads: %}
+                    <tr>
+                        <td>{{ lead['cust_name'] }}</td>
+                        <td>{{ lead['num_leads'] }}</td>
+                    </tr>
+                    {% endfor %}
+                {% else: %}
+                    {% for item in session['range']: %}
+                    <tr>
+                        <td>{{ item['cust_name'] }}</td>
+                        <td>{{ item['num_leads'] }}</td>
+                    </tr>
+                    {% endfor %}
+                {% endif %}
             </tbody>
         </table>
         <script>
@@ -46,9 +72,15 @@
                     indexLabelFontSize: 16,
                     indexLabel: " {label} - {y} ",
                     dataPoints: [
-                        {% for lead in leads: %}
-                        { y: {{ lead['num_leads'] }}, label: "{{ lead['cust_name'] }}" },
-                        {% endfor %}
+                        {% if 'range' not in session: %}
+                            {% for lead in leads: %}
+                                { y: {{ lead['num_leads'] }}, label: "{{ lead['cust_name'] }}" },
+                            {% endfor %}
+                        {% else: %}
+                            {% for item in session['range']: %}
+                                { y: {{ item['num_leads'] }}, label: "{{ item['cust_name'] }}" },
+                            {% endfor %}
+                        {% endif %}
                     ]
                 }]
             };

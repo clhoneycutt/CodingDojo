@@ -9,10 +9,20 @@
 </head>
 <body>
     <div class="container">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class=flashes>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        {% block body %}{% endblock %}
         <h2>Enter a valid email address</h2>
         <form action="/validate_email" method="post">
         Email Address: <input type="text" name="email" class="form-control">
-            <input type="submit" name="submitemail" value="Submit">
+            <input class="float-right btn btn-primary" type="submit" name="submitemail" value="Submit">
         </form>
 
     </div>

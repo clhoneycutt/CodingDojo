@@ -61,7 +61,7 @@ def success():
     mysql = connectToMySQL('validation')
     query = "SELECT * FROM users"
     emails = mysql.query_db(query)
-    length = len(emails) - 1
+    length = (len(emails)) - 1
     
     return render_template('success.html', emails=emails, length=length)
 

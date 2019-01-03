@@ -10,7 +10,7 @@
 <body>
     <div class="container">
         {% if session['creation']: %}
-            <p class="successmsg">The email address you entered ({{ emails[length]['email'] }}) is a VALID email address! Thank you! </p>
+            <p class="successmsg">The email address you entered {{ emails[length]['email'] }} is a VALID email address! Thank you! </p>
         {% endif %}
         
         <h3>Email Addresses Entered:</h3>

@@ -160,12 +160,13 @@ def login():
 
 @app.route('/success', methods=['GET'])
 def success():
-    print("\n\n", "="*30, "\n Success Route\nSession: ", session, "\n", "="*30,"\n\n")
     if 'userid' in session:
         if verify_account(session['userid']) != True:
             session.clear()
 
-    if not session['logged_in']:
+    if len(session) < 1:
+        return redirect('/')
+    if session['logged_in'] != True or 'logged_in' not in session:
         flash('You must be logged in to view this page', "nav_error")
         return redirect('/')
 

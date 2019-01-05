@@ -21,8 +21,8 @@
             <h4>Date Range of leads generated</h4>
             <p>Test ranges: 2015-06-01 thru 2015-06-31 and 2015-08-01 thru 2015-08-31</p> <!-- for testing purposes. -->
             <form action="rangefinder" method='post'>
-                <input type="text" name='date_from' class="form-control d-inline" id="date_from" ng-required="true" placeholder="{{ first_date }}" >
-                <input type="text" name='date_to' class="form-control d-inline" id="date_to" ng-required="true" placeholder="{{ second_date }}" >
+                From: <input type="text" name='date_from' class="form-control d-inline" id="date_from" ng-required="true" placeholder="{{ first_date }}" >
+                To: <input type="text" name='date_to' class="form-control d-inline" id="date_to" ng-required="true" placeholder="{{ second_date }}" >
                 <input class="float-left" type="submit" name="update" value="Update">
             </form>
             <form action="clear" method='post'>

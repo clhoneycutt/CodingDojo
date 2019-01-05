@@ -6,4 +6,5 @@
 /Python/.vscode/
 /Python/.idea/
 /Python/python_OOP/test/
+*.pyc
 

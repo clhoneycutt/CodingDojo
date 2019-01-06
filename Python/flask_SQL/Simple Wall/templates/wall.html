@@ -4,9 +4,8 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>The Wall</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="main.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -17,7 +16,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">The Wall <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/thewall">The Wall <span class="sr-only">(current)</span></a>
                 </li>
             </ul>
             {% if session['logged_in']: %}
@@ -27,5 +26,24 @@
             {% endif %}
         </div>
     </nav>
+    <div class="container">
+        <div class="row">
+            
+            <div class="col-lg-6 col-md-6 col-sm-6 col-1 messages"> <!-- TODO - Create CSS class-->
+                <p class="message_header">{num_message} Message(s) for you ({name})</p>
+                <p class="message">{sender_name} said ({num} hours ago)</p>
+                <input type="submit" class="trashcan" value="  ">
+            </div>
+            
+            <div class="col-lg-6 col-md-6 col-sm-6 col-1 sendmessage"> <!-- TODO - Create CSS class-->
+                <p>Send a message</p>
+                <h4>You have sent a total of {num} messages</h4>
+                <div class="users"> <!-- TODO - Create CSS Class -->
+
+                </div>
+            </div>
+
+        </div>
+    </div>
 </body>
 </html>

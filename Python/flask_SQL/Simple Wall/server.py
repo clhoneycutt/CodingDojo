@@ -17,7 +17,7 @@ app.secret_key = "SuPeRsEcReTkEy"
 # Checks whether the email is already in the database.
 # Used during registration process
 def check_duplicates(emailAddress):
-    mysql = connectToMySQL('loginreg')
+    mysql = connectToMySQL('thewall')
     duplicate_query = "SELECT email FROM users;"
     duplicate_check = mysql.query_db(duplicate_query)
     result = False
@@ -36,7 +36,7 @@ def verify_account(id):
     
     # Searches database for specific user id
     # Query ==================
-    mysql = connectToMySQL('loginreg')
+    mysql = connectToMySQL('thewall')
     query = "SELECT id FROM users WHERE id = %(id)s"
     data = {
         'id': id
@@ -60,7 +60,7 @@ def login_validation(email, password):
     
     # Searches database for specific email address
     # Query ==================
-    mysql = connectToMySQL('loginreg')
+    mysql = connectToMySQL('thewall')
     query = "SELECT * FROM users WHERE email = %(email)s"
     data = {'email': email}
     logincheck = mysql.query_db(query,data)
@@ -132,7 +132,7 @@ def register():
     elif request.form['confpassword'] != request.form['password']:
         flash("Passwords must match", 'confpassword')
 
-    # If there are any errors, displays them and does not move forward.
+    # If there are any errors, displays them and redirects back to home.
     if '_flashes' in session.keys():
         return redirect("/")
     # Successful registration
@@ -146,7 +146,7 @@ def register():
 
         # Creates account in the database
         # Query ====================
-        mysql = connectToMySQL('loginreg')
+        mysql = connectToMySQL('thewall')
         query = "INSERT INTO users (first_name, last_name, email, pwhash, created_at) VALUES (%(first_name)s, %(last_name)s, %(email)s, %(pwhash)s, NOW());"
         data = {
         'first_name': request.form['first_name'],
@@ -194,7 +194,7 @@ def login():
 # ======================================
 
 
-@app.route('/thewall', methods=['GET'])
+@app.route('/success', methods=['GET'])
 def success():
     
     # Logs user out if account is deleted while they have an active session.
@@ -204,7 +204,7 @@ def success():
             return redirect('/logout')
     
     # Blocks access if user is not logged in.
-    if session['logged_in'] != True or 'logged_in' not in session:
+    if 'logged_in' not in session or session['logged_in'] != True:
         flash('You must be logged in to view this page', "nav_error")
         return redirect('/')
     
@@ -216,14 +216,39 @@ def success():
 
     # Selects all users for display.
     # Query =========================
-    mysql = connectToMySQL('loginreg')
+    mysql = connectToMySQL('thewall')
     query = "SELECT * FROM users"
     users = mysql.query_db(query)
     # ===============================
     
     # variable used to locate most recently added account
     length = len(users) - 1
-    return render_template('wall.html', users=users, length=length)
+    return render_template('success.html', users=users, length=length)
+
+
+# ======================================
+# THE WALL
+# ======================================
+
+
+@app.route('/thewall', methods=['GET'])
+def thewall():
+
+    if 'logged_in' not in session:
+        session['logged_in'] = False
+    # Logs user out if account is deleted while they have an active session.
+    # Rare circumstance in this instance
+    if 'userid' in session:
+        if verify_account(session['userid']) != True:
+            return redirect('/logout')
+
+        # Blocks access if user is not logged in.
+    if session['logged_in'] != True:
+        flash('You must be logged in to view this page', "nav_error")
+        return redirect('/')
+    
+    return render_template('wall.html')
+
 
 # ======================================
 # ACCOUNT DELETION
@@ -237,7 +262,7 @@ def delete():
     
     # Deletes row from database
     # Query =========================
-    mysql = connectToMySQL('LoginReg')
+    mysql = connectToMySQL('thewall')
     session['recentreg'] = False
     query = "DELETE FROM users where id = %(id)s"
     data = {'id': request.form['id']}

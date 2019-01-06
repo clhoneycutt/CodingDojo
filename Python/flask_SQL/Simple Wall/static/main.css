@@ -12,3 +12,9 @@
     color: white;
     padding: 15px;
 }
+.trashcan{
+    background: url('/static/img/trashcan_icon.png');
+    background-position:center;
+    background-repeat:no-repeat;
+    border-radius: 5px;
+}

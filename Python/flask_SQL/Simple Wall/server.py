@@ -1,6 +1,7 @@
 from flask import Flask, request, redirect, render_template, session, flash
 from mysqlconnection import connectToMySQL
 from flask_bcrypt import Bcrypt
+import timeago, datetime
 import re
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 NAME_REGEX = re.compile(r'^[a-zA-Z]+$')
@@ -147,7 +148,7 @@ def register():
         # Creates account in the database
         # Query ====================
         mysql = connectToMySQL('thewall')
-        query = "INSERT INTO users (first_name, last_name, email, pwhash, created_at) VALUES (%(first_name)s, %(last_name)s, %(email)s, %(pwhash)s, NOW());"
+        query = "BEGIN; INSERT INTO users (first_name, last_name, email, pwhash, created_at) VALUES(%(first_name)s, %(last_name)s, %(email)s, %(pwhash)s, NOW()); INSERT INTO walls (user_id, created_at) VALUES LAST_INSERT_ID(), NOW()); COMMIT;"
         data = {
         'first_name': request.form['first_name'],
         'last_name': request.form['last_name'],
@@ -234,6 +235,7 @@ def success():
 @app.route('/thewall', methods=['GET'])
 def thewall():
 
+    # Sets status as NOT logged in by default
     if 'logged_in' not in session:
         session['logged_in'] = False
     # Logs user out if account is deleted while they have an active session.
@@ -246,6 +248,13 @@ def thewall():
     if session['logged_in'] != True:
         flash('You must be logged in to view this page', "nav_error")
         return redirect('/')
+
+    # Query ============================
+    mysql = connectToMySQL('thewall')
+    query = "SELECT "
+
+    # ==================================
+    
     
     return render_template('wall.html')
 

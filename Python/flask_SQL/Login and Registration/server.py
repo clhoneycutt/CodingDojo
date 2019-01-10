@@ -132,7 +132,7 @@ def register():
     elif request.form['confpassword'] != request.form['password']:
         flash("Passwords must match", 'confpassword')
 
-    # If there are any errors, displays them and does not move forward.
+    # If there are any errors, displays them and redirects back to home.
     if '_flashes' in session.keys():
         return redirect("/")
     # Successful registration

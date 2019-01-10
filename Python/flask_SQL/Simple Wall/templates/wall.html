@@ -30,16 +30,20 @@
         <div class="row">
             
             <div class="col-lg-6 col-md-6 col-sm-6 col-1 messages"> <!-- TODO - Create CSS class-->
-                <p class="message_header">{num_message} Message(s) for you ({name})</p>
-                <p class="message">{sender_name} said ({num} hours ago)</p>
+                <p class="header">{num_message} Message(s) for you ({{wall_owner}})</p>
+                <p class="message">{sender_name} said "Hey What's up" ({num} hours ago)</p>
                 <input type="submit" class="trashcan" value="  ">
             </div>
             
             <div class="col-lg-6 col-md-6 col-sm-6 col-1 sendmessage"> <!-- TODO - Create CSS class-->
-                <p>Send a message</p>
-                <h4>You have sent a total of {num} messages</h4>
+                <p class="header">Send a message</p>
+                <h5>You have sent a total of {num} messages</h5>
                 <div class="users"> <!-- TODO - Create CSS Class -->
-
+                    <form action="">
+                        <label for="{user}">{user}</label>
+                        <input type="textbox">
+                        <input type="submit" value="Send">
+                    </form>
                 </div>
             </div>
 

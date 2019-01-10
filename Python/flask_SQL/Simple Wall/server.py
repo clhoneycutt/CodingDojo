@@ -66,7 +66,7 @@ def login_validation(email, password):
     data = {'email': email}
     logincheck = mysql.query_db(query,data)
     # ========================
-    
+
     # Check stored pwhash against the entered password 
     if bcrypt.check_password_hash(logincheck[0]["pwhash"], password):
         # If the password is correct, set some session variables
@@ -148,7 +148,7 @@ def register():
         # Creates account in the database
         # Query ====================
         mysql = connectToMySQL('thewall')
-        query = "BEGIN; INSERT INTO users (first_name, last_name, email, pwhash, created_at) VALUES(%(first_name)s, %(last_name)s, %(email)s, %(pwhash)s, NOW()); INSERT INTO walls (user_id, created_at) VALUES LAST_INSERT_ID(), NOW()); COMMIT;"
+        query = "INSERT INTO users (first_name, last_name, email, pwhash, created_at) VALUES(%(first_name)s, %(last_name)s, %(email)s, %(pwhash)s, NOW());"
         data = {
         'first_name': request.form['first_name'],
         'last_name': request.form['last_name'],
@@ -249,14 +249,19 @@ def thewall():
         flash('You must be logged in to view this page', "nav_error")
         return redirect('/')
 
-    # Query ============================
+    # Multiple Queries needed for this page
+    # Query - Logged in user's name ====
     mysql = connectToMySQL('thewall')
-    query = "SELECT "
-
+    query = "SELECT first_name FROM users WHERE id = %(user_id)s"
+    data = {
+        'user_id': session['userid']
+    }
+    wall_owner_dict = mysql.query_db(query, data)
+    wall_owner = wall_owner_dict[0]['first_name']
     # ==================================
     
     
-    return render_template('wall.html')
+    return render_template('wall.html', wall_owner=wall_owner)
 
 
 # ======================================

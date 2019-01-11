@@ -5,6 +5,9 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
 -- Schema thewall
 -- -----------------------------------------------------
 
@@ -36,17 +39,22 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `thewall`.`messages` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `user_id` INT(11) NOT NULL,
+  `sender_id` INT(11) NOT NULL,
+  `recipient_id` INT(11) NOT NULL,
   `content` TEXT NULL DEFAULT NULL,
-  `receiver_id` TINYINT NULL,
-  `sender_id` TINYINT NULL,
   `created_at` DATETIME NULL DEFAULT NULL,
   `updated_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  INDEX `fk_messages_users1_idx` (`user_id` ASC) VISIBLE,
+  INDEX `fk_messages_users1_idx` (`sender_id` ASC) VISIBLE,
+  INDEX `fk_messages_users2_idx` (`recipient_id` ASC) VISIBLE,
   CONSTRAINT `fk_messages_users1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `thewall`.`users` (`id`))
+    FOREIGN KEY (`sender_id`)
+    REFERENCES `thewall`.`users` (`id`),
+  CONSTRAINT `fk_messages_users2`
+    FOREIGN KEY (`recipient_id`)
+    REFERENCES `thewall`.`users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 

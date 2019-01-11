@@ -9,12 +9,15 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Simple Wall, Inc.</a>
+        <a class="navbar-brand" href="/">Simple Wall, Inc.</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/success">Admin</a>
+                </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="/thewall">The Wall</a>
                 </li>
@@ -49,7 +52,7 @@
                 <td>{{ user['email'] }}</td>
                 <td>{{ user['created_at']}}</td>
                 <td>
-                    <form action="/delete" method="post">
+                    <form action="/accountdelete" method="post">
                         <input type="hidden" name="id" value="{{ user['id'] }}">
                         <input type="submit" name="delete" value="Delete" class="btn btn-danger">
                     </form>
@@ -57,12 +60,6 @@
             </tr>
         {% endfor %}
         </table>
-        <form action="/">
-            <input type="submit" name="back" value="Back" class="float-right btn btn-success">
-        </form>
-        <form action="/logout">
-            <input type="submit" name="logout" value="Logout" class="float-right btn btn-danger">
-        </form>
     </div>
 </body>
 </html>

@@ -71,7 +71,7 @@ def login_validation(email, password):
     if bcrypt.check_password_hash(logincheck[0]["pwhash"], password):
         # If the password is correct, set some session variables
         session['userid'] = logincheck[0]['id']
-        session['loginmessage'] = True       
+        session['logging_in'] = True       
         session['first_name'] = logincheck[0]['first_name']
         session['logged_in'] = True
         # Successful login
@@ -101,17 +101,23 @@ def index():
 @app.route('/register', methods=['POST'])
 def register():
     
+
+    # VALIDATIONS ======================
     # First name validations
     if len(request.form['first_name']) < 1:
         flash("First name cannot be blank!", 'first_name')
     elif not NAME_REGEX.match(request.form['first_name']):
         flash("First name must contain at least two letters and contain only letters!")
-    
+
+    # ==================================
+
     # Last name validations
     if len(request.form['last_name']) < 1:
         flash("First name cannot be blank!", 'last_name')
     elif not NAME_REGEX.match(request.form['last_name']):
         flash("Last name must contain at least two letters and contain only letters!")
+
+    # ==================================
 
     # Email validations
     if len(request.form['email-reg']) < 1:
@@ -121,17 +127,23 @@ def register():
     elif check_duplicates(request.form['email-reg']):
         flash("We encountered a problem.", 'email-reg')
 
+    # ==================================
+
     # Password validations
     if len(request.form['password']) < 1:
         flash("Password cannot be blank!", 'password')
     elif not PW_REGEX.match(request.form['password']):
         flash("Password must be at least 8 characters long and contain letters, numbers and the following: @#$%^&+=", 'password')
 
+    # ==================================
+
     # Password confirmation validations
     if len(request.form['confpassword']) < 1:
         flash("Please re-enter password", 'confpassword')
     elif request.form['confpassword'] != request.form['password']:
         flash("Passwords must match", 'confpassword')
+    
+    # ==================================
 
     # If there are any errors, displays them and redirects back to home.
     if '_flashes' in session.keys():
@@ -198,19 +210,29 @@ def login():
 @app.route('/success', methods=['GET'])
 def success():
     
+    # Security Measures ****************
+    # Sets status as NOT logged in by default
+    if 'logged_in' not in session or session['logged_in'] != True:
+        session['logged_in'] = False
     # Logs user out if account is deleted while they have an active session.
-    # Rare circumstance in this instance
     if 'userid' in session:
         if verify_account(session['userid']) != True:
             return redirect('/logout')
-    
-    # Blocks access if user is not logged in.
-    if 'logged_in' not in session or session['logged_in'] != True:
+        # Blocks access if user is not logged in.
+    if session['logged_in'] != True:
         flash('You must be logged in to view this page', "nav_error")
         return redirect('/')
+    # **********************************
     
     # If the user just completed registration this will alter the messages 
     # displayed on the success page.
+    if 'recentreg' not in session:
+        session['recentreg'] = False
+    if session['logging_in'] == False:
+        session['loginmessage'] = False
+    if session['logging_in'] == True :
+        session['loginmessage'] = True
+        session['logging_in'] = False
     if session['recentreg']:
         session['regmessage'] = True
         session['loginmessage'] = False
@@ -235,21 +257,22 @@ def success():
 @app.route('/thewall', methods=['GET'])
 def thewall():
 
+    # Security Measures ****************
     # Sets status as NOT logged in by default
-    if 'logged_in' not in session:
+    if 'logged_in' not in session or session['logged_in'] != True:
         session['logged_in'] = False
     # Logs user out if account is deleted while they have an active session.
-    # Rare circumstance in this instance
     if 'userid' in session:
         if verify_account(session['userid']) != True:
             return redirect('/logout')
-
         # Blocks access if user is not logged in.
     if session['logged_in'] != True:
         flash('You must be logged in to view this page', "nav_error")
         return redirect('/')
+    # **********************************
 
     # Multiple Queries needed for this page
+    # Receiving message queries
     # Query - Logged in user's name ====
     mysql = connectToMySQL('thewall')
     query = "SELECT first_name FROM users WHERE id = %(user_id)s"
@@ -259,17 +282,135 @@ def thewall():
     wall_owner_dict = mysql.query_db(query, data)
     wall_owner = wall_owner_dict[0]['first_name']
     # ==================================
+
+    # Query - Number of messages sent to logged in user
+    mysql = connectToMySQL('thewall')
+    query = "SELECT COUNT(messages.id) AS num FROM messages where recipient_id = %(recipient_id)s"
+    data = {
+        'recipient_id': session['userid']
+    }
+    num_received_messages = mysql.query_db(query, data)
+    # ===================================
+
+    # Query - Received Messages =========
+    mysql = connectToMySQL('thewall')
+    query = "SELECT users.first_name AS sender_name, messages.id, messages.content, messages.created_at FROM users LEFT JOIN messages ON users.id = messages.sender_id WHERE messages.recipient_id = %(recipient_id)s;"
+    data = {
+        'recipient_id': session['userid']
+    }
+    received_messages = mysql.query_db(query, data)
+    print(received_messages)
+    # Turn created_at field into time ago format
+    now = datetime.datetime.now() + datetime.timedelta(seconds = 60 * 3.4)
+    for message in received_messages:
+        date = message['created_at']
+        time_ago = timeago.format(date, now)
+        print(time_ago)
+
+    # ===================================
+
+    # Sending Messages queries
+    # Query - Available users to message
+    mysql = connectToMySQL('thewall')
+    query = "SELECT id, first_name FROM users WHERE id != %(user_id)s;"
+    data = {
+        'user_id': session['userid']
+    }
+    other_users = mysql.query_db(query, data)
+    # ===================================
+
+    # Query - Total number of messages sent
+    mysql = connectToMySQL('thewall')
+    query = "SELECT COUNT(messages.id) AS num FROM messages WHERE sender_id = %(sender_id)s;"
+    data = {
+        'sender_id': session['userid']
+    }
+    num_messages_sent = mysql.query_db(query, data)
+    # ===================================
+
+    return render_template('wall.html', wall_owner=wall_owner, other_users=other_users, num_messages_sent=num_messages_sent, num_received_messages=num_received_messages, received_messages=received_messages)
+
+@app.route('/send_message', methods=['POST'])
+def send_message():
     
+    # Security Measures ****************
+    # Sets status as NOT logged in by default
+    if 'logged_in' not in session  or session['logged_in'] != True:
+        session['logged_in'] = False
     
-    return render_template('wall.html', wall_owner=wall_owner)
+    # Logs user out if account is deleted while they have an active session.
+    if 'userid' in session:
+        if verify_account(session['userid']) != True:
+            return redirect('/logout')
+
+        # Blocks access if user is not logged in.
+    if session['logged_in'] != True:
+        flash('You must be logged in to view this page', "nav_error")
+        return redirect('/')
+    # **********************************
+
+    # Query - Add a sent message to the database
+    mysql = connectToMySQL('thewall')
+    query = "INSERT INTO messages (sender_id, recipient_id, content, created_at) VALUES (%(sender_id)s, %(recipient_id)s, %(content)s, NOW());"
+    data = {
+        'sender_id': session['userid'],
+        'recipient_id': request.form['sender_id'],
+        'content': request.form['message']
+    }
+    mysql.query_db(query,data)
+    return redirect('/thewall')
+    # ==================================
+
+@app.route('/delete_message', methods=['POST'])
+def delete_message():
+
+    # Security Measures ****************
+    # Sets status as NOT logged in by default
+    if 'logged_in' not in session  or session['logged_in'] != True:
+        session['logged_in'] = False
+    
+    # Logs user out if account is deleted while they have an active session.
+    if 'userid' in session:
+        if verify_account(session['userid']) != True:
+            return redirect('/logout')
+
+        # Blocks access if user is not logged in.
+    if session['logged_in'] != True:
+        flash('You must be logged in to view this page', "nav_error")
+        return redirect('/')
+    # **********************************
+
+    # Query - Delete Message
+    mysql = connectToMySQL('thewall')
+    query = "DELETE FROM messages WHERE id = %(message_id)s"
+    data = {
+        'message_id': request.form['message_id']
+    }
+    mysql.query_db(query, data)
+    return redirect('/thewall')
 
 
 # ======================================
 # ACCOUNT DELETION
 # ======================================
 
-@app.route('/delete', methods=['POST'])
-def delete():
+@app.route('/accountdelete', methods=['POST'])
+def acct_delete():
+    
+    # Security Measures ****************
+    # Sets status as NOT logged in by default
+    if 'logged_in' not in session  or session['logged_in'] != True:
+        session['logged_in'] = False
+    # Logs user out if account is deleted while they have an active session.
+    if 'userid' in session:
+        if verify_account(session['userid']) != True:
+            return redirect('/logout')
+    # Blocks access if user is not logged in.
+    if session['logged_in'] != True:
+        flash('You must be logged in to view this page', "nav_error")
+        return redirect('/')
+    # **********************************
+    
     # Defaults this setting.
     if 'recentreg' in session:
         session['recentreg'] = False

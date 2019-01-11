@@ -35,11 +35,12 @@
             <div class="col-lg-6 col-md-6 col-sm-6 col-1 messages">
                 <p class="header">{{ num_received_messages[0]['num'] }} Message(s) for you, {{wall_owner}}</p>
                 {% for message in received_messages: %}
-                <p class="message">{{ message['sender_name']}} said "{{ message['content'] }}" ({num} hours ago)</p>
+                <p class="message">{{ message['sender_name']}} said "{{ message['content'] }}" ({{ message['created_at'] }})</p>
                 <form class="delete_message" action="/delete_message" method="POST">
                     <input type="hidden" name="message_id" value="{{ message['id'] }}">
                     <input type="submit" class="trashcan" value="  ">
                 </form>
+                <br>
                 {% endfor %}
             </div>
             

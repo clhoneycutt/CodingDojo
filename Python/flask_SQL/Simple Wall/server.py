@@ -299,14 +299,14 @@ def thewall():
         'recipient_id': session['userid']
     }
     received_messages = mysql.query_db(query, data)
-    print(received_messages)
+
     # Turn created_at field into time ago format
     now = datetime.datetime.now() + datetime.timedelta(seconds = 60 * 3.4)
     for message in received_messages:
         date = message['created_at']
         time_ago = timeago.format(date, now)
-        print(time_ago)
-
+        message['created_at'] = time_ago
+        
     # ===================================
 
     # Sending Messages queries

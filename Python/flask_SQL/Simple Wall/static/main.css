@@ -28,3 +28,6 @@
     background-repeat:no-repeat;
     border-radius: 5px;
 }
+.break{
+    display: inline;
+}

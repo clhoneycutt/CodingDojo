@@ -1,0 +1,16 @@
+.container{
+    margin-top: 100px;
+}
+.card{
+    padding: 20px;
+}
+.form-group{
+    width: 100%
+}
+.form-group input, .form-group select{
+    width: 49%;
+    float: right;
+}
+input{
+    float: right;
+}

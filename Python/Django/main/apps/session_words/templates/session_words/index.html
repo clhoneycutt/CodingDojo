@@ -31,10 +31,16 @@
             {% csrf_token %}
         </form>
         <div class="words">
-            {% for element in req.session.words %}
-            <h3 class="d-inline">{{word}}</h3>
-            <p class="d-inline">- added on 8:55:55pm, Aprimay 55th 2012</p>
-            {% endfor %}
+            <table class="table table-borderless">
+                <tbody>
+                {% for word in request.session.words %}
+                    <tr>
+                        <td style="color: {{word.color}}; {{word.show_big }}">{{ word.word }}</td>
+                        <td>- added on {{ word.added }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>    
+            </table>
         </div>
     </div>
 </body>

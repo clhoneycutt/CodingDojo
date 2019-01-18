@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from datetime import datetime
 
 def index(req):
     if 'word' in req.session:
@@ -10,16 +11,20 @@ def index(req):
 def add_word(req):
     if req.method == 'POST':
         if 'big' in req.POST:
-            showbig = 1
+            showbig = "font-size: 1.5em;"
         else:
-            showbig = 0
+            showbig = ""
 
         if 'words' not in req.session:
             req.session['words'] = []
 
+        now = datetime.now()
+        timestamp = now.strftime("%m/%d/%Y %I:%M %p")
+
+
         temp_list = req.session['words']
         
-        temp_list.append({"word": req.POST['new_word'], "color": req.POST['color'], "show_big": showbig})
+        temp_list.append({"word": req.POST['new_word'], "color": req.POST['color'], "show_big": showbig, "added": timestamp},)
         
         req.session['words'] = temp_list
         print(req.session['words'])

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'session_words/css/main.css' %}">
+</head>
+<body>
+    <div class="leftpanel">
+        <h2>Add a new word</h2>
+        <form action="/session_words/add_word" method="POST">
+            {% csrf_token %}
+            <input type="text" name="new_word" id="new_word" class="d-block indent">
+            <label for="color" class="d-block">Choose Color</label>
+            <input type="hidden" name="color" value="black">
+            <input type="radio" name="color" id="color" value="red" class="indent"> Red<br>
+            <input type="radio" name="color" id="color" value="green" class="indent"> Green<br>
+            <input type="radio" name="color" id="color" value="blue" class="indent"> Blue<br>
+            <input type="checkbox" name="big" id="big" value="1">  show in BIG fonts!<br>
+            <button name="Submit">Submit</button>
+        </form>
+
+    </div>
+    <div class="divider"></div>
+    <div class="rightpanel">
+        <form action="/session_words/clear_session" method="POST" align="right">
+            <button class="button">Clear Session</button>
+            {% csrf_token %}
+        </form>
+        <div class="words">
+            {% for element in req.session.words %}
+            <h3 class="d-inline">{{word}}</h3>
+            <p class="d-inline">- added on 8:55:55pm, Aprimay 55th 2012</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

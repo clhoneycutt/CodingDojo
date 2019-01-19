@@ -1,0 +1,51 @@
+*{
+    padding: 0px;
+}
+
+/* Header */
+/* ============================================== */
+
+.yourgold{
+    margin-top: 15px;
+    display: inline-block;
+}
+.goldamt{
+    display: inline;
+    margin-left: 25px;
+}
+
+/* Main Body */
+/* ============================================== */
+
+.card-body{
+    text-align: center;
+}
+.card{
+    width: 24.7%;
+}
+.card-text{
+    min-height: 75px;
+}
+input{
+    width: 100px;
+
+}
+.win{
+    color: green;
+    line-height: 50%;
+}
+.loss{
+    color: red;
+    line-height: 50%;
+}
+
+/* Activity Log */
+/* ============================================== */
+
+
+.result{
+    border: 2px solid black;
+    height: 200px;
+    overflow-y: scroll;
+    padding: 5px;
+}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>New User</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'users/css/main.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Add a new user</h1>
+        <form action="/create" method="POST">
+            <label for="first_name">First Name</label>
+            <input type="text" name="first_name" id="first_name" class="d-block">
+            <label for="last_name">Last Name</label>
+            <input type="text" name="last_name" id="last_name" class="d-block">
+            <label for="email">Email</label>
+            <input type="text" name="first_name" id="first_name" class="d-block">
+            {% csrf_token %}
+            <button class="btn btn-primary">Create</button>
+        </form>
+        <a href="#">Go Back</a>
+    </div>
+</body>
+</html>

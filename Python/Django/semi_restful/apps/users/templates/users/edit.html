@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Edit User</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'users/css/main.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Edit User 1</h1>
+        <form action="/edit" method="POST">
+            <label for="first_name">First Name</label>
+            <input type="text" name="first_name" id="first_name" class="d-block" placeholder="Chris">
+            <label for="last_name">Last Name</label>
+            <input type="text" name="last_name" id="last_name" class="d-block" placeholder="Hone">
+            <label for="email">Email</label>
+            <input type="text" name="first_name" id="first_name" class="d-block" placeholder="Chris@test.com">
+            {% csrf_token %}
+            <button class="btn btn-primary">Edit</button>
+        </form>
+        <p> <a href="#">Show</a> | <a href="#">Go Back</a></p>
+    </div>
+</body>
+</html>

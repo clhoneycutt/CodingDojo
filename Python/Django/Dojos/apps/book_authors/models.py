@@ -42,14 +42,70 @@ class Author(models.Model):
 
 # Add a new field in the authors table called 'notes'.  Make this a TextField.  Successfully create and run the migration files.
 # Using the shell...
+
 # Change the name of the 5th book to C#
+# change = Book.objects.get(id=5)
+# change.name = 'C#'
+# change.save()
+
 # Change the first_name of the 5th author to Ketul
+# change = Author.objects.get(id=5)
+# change.first_name = "Ketul"
+# change.save()
+
 # Assign the first author to the first 2 books
+# book1 = Book.objects.get(id=1)
+# book2 = Book.objects.get(id=2)
+# author = Author.objects.get(id=1)
+# author.books.add(book1)
+# author.books.add(book2)
+
 # Assign the second author to the first 3 books
+# book1 = Book.objects.get(id=1)
+# book2 = Book.objects.get(id=2)
+# book3 = Book.objects.get(id=3)
+# author = Author.objects.get(id=2)
+# author.books.add(book1)
+# author.books.add(book2)
+# author.books.add(book3)
+
 # Assign the third author to the first 4 books
+# book1 = Book.objects.get(id=1)
+# book2 = Book.objects.get(id=2)
+# book3 = Book.objects.get(id=3)
+# book4 = Book.objects.get(id=4)
+# author = Author.objects.get(id=3)
+# author.books.add(book1)
+# author.books.add(book2)
+# author.books.add(book3)
+# author.books.add(book4)
+
 # Assign the fourth author to the first 5 books (or in other words, all the books)
+# books = Book.objects.all()
+# books = list(books)
+# author = Author.objects.get(id=4)
+# author.books.add(*books)
+
 # For the 3rd book, retrieve all the authors
+# Book.objects.get(id=3).authors.all()
+
 # For the 3rd book, remove the first author
+# book = Book.objects.get(id=3)
+# author = book.authors.first()
+# book.authors.remove(author)
+
+
 # For the 2nd book, add the 5th author as one of the authors
+# author = Author.objects.get(id=5)
+# book = Book.objects.get(id=2)
+# author.books.add(book)
+
+
 # Find all the books that the 3rd author is part of
+# author = Author.objects.get(id=3)
+# author.books.all()
+
+
 # Find all the books that the 2nd author is part of
+# author = Author.objects.get(id=2)
+# author.books.all()

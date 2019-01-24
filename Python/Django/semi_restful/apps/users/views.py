@@ -22,4 +22,8 @@ def destroy(request): # GET Method
     return redirect('/users')
 
 def index(request): # GET Method
-    return render(request, 'users/index.html')
+    context = {
+        'users': User.objects.all()
+    }
+
+    return render(request, 'users/index.html', context)

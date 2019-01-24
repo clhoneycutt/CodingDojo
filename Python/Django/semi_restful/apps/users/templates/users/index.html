@@ -23,20 +23,25 @@
                 </tr>
             </thead>
             <tbody>
+                {% for user in users %}
                 <tr>
-                    <td>1</td>
-                    <td>Chris Honeycutt</td>
-                    <td>Chris@test.com</td>
+                    <td>{{user.id}}</td>
+                    <td>{{user.first_name}} {{user.last_name}}</td>
+                    <td>{{user.email}}</td>
                     <td>Today</td>
                     <td>
-                        <a href="#">Show</a>
-                        <a href="#">Edit</a>
-                        <a href="#">Delete</a>
+                        <a href="/users/{{user.id}}">Show</a>
+                        <a href="/users/{{user.id}}/edit">Edit</a>
+                        <form class="d-inline-block" action="/users/delete">
+                            <input type="hidden" name="{{id}}">
+                            <a href="#">Delete</a>
+                        </form>
                     </td>
                 </tr>
+                {% endfor %}
             </tbody>
         </table>
-        <a href="#">Add a New User</a>
+        <a href="/users/new">Add a New User</a>
     </div>
     
 </body>

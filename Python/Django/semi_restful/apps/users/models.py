@@ -1,45 +1,50 @@
 from django.db import models
 import re
-EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
-NAME_REGEX = re.compile(r'^[a-zA-Z]+$')
+
 
 # Our new manager!
 # No methods in our new manager should ever catch the whole request object with a parameter!!! 
 # (just parts, like request.POST)
 class UserManager(models.Manager):
     def check_duplicates(self, email):
-        pass
+        alreadyExists = User.objects.filter(email=email)
+        if alreadyExists:
+            return True
+        else:
+            return False
 
     def validate(self, postData):
-        errors = {}
-        
+        # This should be broken up into separate validation requests, but isn't for the sake of time.
+
+        errors = []
+        EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+        NAME_REGEX = re.compile(r'^[a-zA-Z]+$')
         # First name validations============
         if len(postData['first_name']) < 0:
-            errors["first_name"] = "First name cannot be blank"
+            errors.append("First name cannot be blank") 
         elif len(postData["first_name"]) > 60:
-            errors["first_name"] = "First name cannot be longer than 60 characters"
+            errors.append("First name cannot be longer than 60 characters")
         elif not NAME_REGEX.match(postData['first_name']):
-            errors["first_name"] = "First name must contain at least two letters and only contain letters."
-        return errors
+            errors.append("First name must contain at least two letters and only contain letters.")
 
         # ==================================
 
         # Last name validations=============
         if len(postData['last_name']) < 1:
-            errors["last_name"] = "First name cannot be blank!"
+            errors.append("First name cannot be blank!")
         elif not NAME_REGEX.match(postData['last_name']):
-            errors['last_name'] = "Last name must contain at least two letters and contain only letters!"
+            errors.append("Last name must contain at least two letters and contain only letters!")
 
         # ==================================
 
         # Email validations=================
         if len(postData['email']) < 1:
-            errors['email'] = "Email cannot be blank!"
+            errors.append("Email cannot be blank!")
         elif not EMAIL_REGEX.match(postData['email']):
-            errors['email'] = "Invalid Email Address!"
-        # elif check_duplicates(postData['email']):
-        #     errors['email'] = "We encountered a problem."
-
+            errors.append("Invalid Email Address!")
+        elif self.check_duplicates(postData['email']):
+            errors.append("We encountered a problem.")
+        return errors
 
 
 class User(models.Model):

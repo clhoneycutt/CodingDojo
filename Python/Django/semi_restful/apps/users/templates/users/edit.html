@@ -11,19 +11,21 @@
 </head>
 <body>
     <div class="container">
-        <div class="card">
-            <h1>Edit User 1</h1>
-            <form action="/edit" method="POST">
-                <label for="first_name">First Name</label>
-                <input type="text" name="first_name" id="first_name" class="d-block" placeholder="Chris">
-                <label for="last_name">Last Name</label>
-                <input type="text" name="last_name" id="last_name" class="d-block" placeholder="Hone">
-                <label for="email">Email</label>
-                <input type="text" name="first_name" id="first_name" class="d-block" placeholder="Chris@test.com">
-                {% csrf_token %}
-                <button class="btn btn-primary">Edit</button>
-            </form>
-            <p> <a href="/users/1">Show</a> | <a href="/users">Go Back</a></p>
+        <div class="card col-10 col-sm-8 col-md-6 col-lg-4">
+            <div class="card-body">
+                <h1>Edit User {{user.id}}</h1>
+                <form action="/users/{{user.id}}/update" method="POST">
+                    <label for="first_name">First Name</label>
+                    <input type="text" name="first_name" id="first_name" class="d-block" value="{{user.first_name}}">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" name="last_name" id="last_name" class="d-block" value="{{user.last_name}}">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" id="email" class="d-block" value="{{user.email}}">
+                    {% csrf_token %}
+                    <button class="btn btn-primary">Edit</button>
+                </form>
+                <p> <a href="/users/1">Show</a> | <a href="/users">Go Back</a></p>
+            </div>
         </div>
     </div>
 </body>

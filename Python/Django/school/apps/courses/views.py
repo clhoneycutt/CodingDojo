@@ -1,9 +1,16 @@
 from django.shortcuts import render, redirect
+from apps.courses.models import *
 
 def index(request):
-    return render(request, 'courses/index.html')
+    context = {
+        'courses': Course.objects.all()
+    }
+    return render(request, 'courses/index.html', context)
 
 def create(request):
+    newCourse = request.POST
+    Course.objects.create(name=newCourse['course_name'])
+    Description.objects.create(content=newCourse['course_desc'])
     return redirect('courses:index')
 
 def remove(request):

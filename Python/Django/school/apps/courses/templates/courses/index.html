@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Add a new course</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'courses/css/main.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="addcourse">
+            <fieldset>
+                <legend>Add a new course</legend>
+                <form action="{% url 'courses:create' %}" method="POST">
+                    <p class="form-group">
+                        <label for="course_name">Name:</label>
+                        <input type="text" name="course_name" id="course_name" class="col-12 col-sm-8 col-md-6 col-lg-4 form-control">
+                    </p>
+                    <p class="form-group">
+                        <label for="course_desc">Description</label>
+                        <textarea name="course_desc" id="course_desc" cols="44" rows="5" class="form-control"></textarea>
+                    </p>
+                    <button type="submit" class="btn btn-success">Add</button>
+                    {% csrf_token %}
+                </form>
+            </fieldset>
+        </div>
+        <div class="courselist">
+            <legend>Courses</legend>
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Course Name</th>
+                        <th>Description</th>
+                        <th>Date Added</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Example Course</td>
+                        <td>Basic Description</td>
+                        <td>Today</td>
+                        <td><a href="{% url 'courses:remove' %}">Remove</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+</body>
+</html>

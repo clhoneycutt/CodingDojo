@@ -5,15 +5,17 @@ def index(request):
     context = {
         'courses': Course.objects.all()
     }
+
     return render(request, 'courses/index.html', context)
 
 def create(request):
     newCourse = request.POST
-    Course.objects.create(name=newCourse['course_name'])
-    Description.objects.create(content=newCourse['course_desc'])
+    print(newCourse)
+    desc = Description.objects.create(content=newCourse['course_desc'])
+    Course.objects.create(name=f"{newCourse['course_name']}", description=desc)
     return redirect('courses:index')
 
-def remove(request):
+def remove(request, course_id):
     return redirect('courses:index')
 
 def destroy(requset):

@@ -17,7 +17,7 @@ class Description(models.Model):
     objects = courseManager()
 
 class Course(models.Model):
-    description = models.OneToOneField(Description, related_name='course')
+    description = models.OneToOneField(Description, related_name='course', primary_key=True)
     name = models.CharField(max_length=60)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

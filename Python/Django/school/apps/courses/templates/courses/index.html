@@ -39,12 +39,14 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {% for course in courses %}
                     <tr>
-                        <td>Example Course</td>
-                        <td>Basic Description</td>
-                        <td>Today</td>
-                        <td><a href="{% url 'courses:remove' %}">Remove</a></td>
+                        <td>{{ course.name }}</td>
+                        <td>{{course.description_id}}</td>
+                        <td>{{course.created_at}}</td>
+                        <td><a href="">Remove</a></td>
                     </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>

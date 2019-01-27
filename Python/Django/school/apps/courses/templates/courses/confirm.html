@@ -15,15 +15,19 @@
         <table class="table table-borderless">
             <tr>
                 <td>Name: </td>
-                <td>How to bootcamp</td>
+                <td>{{course.name}}</td>
             </tr>
             <tr>
                 <td>Description:</td>
-                <td>Description placeholder</td>
+                <td>{{course.desc}}</td>
             </tr>
         </table>
-        <button>No</button>
-        <button>Yes! I want to delete this</button>
+        <form action="{% url 'courses:index' %}" class="d-inline-block">
+            <button>No</button>
+        </form>
+        <form action="{% url 'courses:destroy' course.id %}" class="d-inline-block">
+            <button>Yes! I want to delete this</button>
+        </form>
     </div>
 </body>
 </html>

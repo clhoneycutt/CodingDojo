@@ -9,7 +9,7 @@ def index(request):
         desc = desc.__dict__
         desc = desc['content']
         course['desc'] = desc
-        print(course)
+        course['id'] = course['description_id']    
     context = {
         'courses': courses,
     }
@@ -23,9 +23,20 @@ def create(request):
     return redirect('courses:index')
 
 def remove(request, course_id):
-    courses = Course.objects.get(id=course_id)
-    print(courses)
-    return render(request, 'courses/confirm.html')
+    course = Course.objects.get(description_id=course_id)
+    course = course.__dict__
+    desc = Description.objects.get(id=course['description_id'])
+    desc = desc.__dict__
+    desc = desc['content']
+    course['desc'] = desc
+    course['id'] = course['description_id']
+    context = {
+        'course': course
+    }
+    
+    return render(request, 'courses/confirm.html', context)
 
-def destroy(request):
+def destroy(request, course_id):
+    goner = Course.objects.get(description_id=course_id)
+    goner.delete()
     return redirect('courses:index')

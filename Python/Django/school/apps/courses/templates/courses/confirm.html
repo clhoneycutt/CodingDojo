@@ -23,10 +23,10 @@
             </tr>
         </table>
         <form action="{% url 'courses:index' %}" class="d-inline-block">
-            <button>No</button>
+            <button class="btn btn-primary">No</button>
         </form>
         <form action="{% url 'courses:destroy' course.id %}" class="d-inline-block">
-            <button>Yes! I want to delete this</button>
+            <button class="btn btn-danger">Yes! I want to delete this</button>
         </form>
     </div>
 </body>

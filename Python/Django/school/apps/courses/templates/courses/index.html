@@ -13,6 +13,14 @@
         <div class="addcourse">
             <fieldset>
                 <legend>Add a new course</legend>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+          
                 <form action="{% url 'courses:create' %}" method="POST">
                     <p class="form-group">
                         <label for="name">Name:</label>

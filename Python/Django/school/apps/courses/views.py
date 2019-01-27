@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from apps.courses.models import *
 
 def index(request):
@@ -17,10 +18,15 @@ def index(request):
 
 def create(request):
     newCourse = request.POST
-    print(newCourse)
-    desc = Description.objects.create(content=newCourse['desc'])
-    Course.objects.create(name=f"{newCourse['name']}", description=desc)
-    return redirect('courses:index')
+    errors = Course.objects.validate(newCourse)
+    if errors:
+        for error in errors:
+            messages.error(request, error)
+        return redirect('courses:index')
+    else:
+        desc = Description.objects.create(content=newCourse['desc'])
+        Course.objects.create(name=f"{newCourse['name']}", description=desc)
+        return redirect('courses:index')
 
 def remove(request, course_id):
     course = Course.objects.get(description_id=course_id)

@@ -15,12 +15,12 @@
                 <legend>Add a new course</legend>
                 <form action="{% url 'courses:create' %}" method="POST">
                     <p class="form-group">
-                        <label for="course_name">Name:</label>
-                        <input type="text" name="course_name" id="course_name" class="col-12 col-sm-8 col-md-6 col-lg-4 form-control">
+                        <label for="name">Name:</label>
+                        <input type="text" name="name" id="name" class="col-12 col-sm-8 col-md-6 col-lg-4 form-control">
                     </p>
                     <p class="form-group">
-                        <label for="course_desc">Description</label>
-                        <textarea name="course_desc" id="course_desc" cols="44" rows="5" class="form-control"></textarea>
+                        <label for="desc">Description</label>
+                        <textarea name="desc" id="desc" cols="44" rows="5" class="form-control"></textarea>
                     </p>
                     <button type="submit" class="btn btn-success">Add</button>
                     {% csrf_token %}
@@ -42,9 +42,9 @@
                     {% for course in courses %}
                     <tr>
                         <td>{{ course.name }}</td>
-                        <td>{{course.description_id}}</td>
+                        <td>{{course.desc}}</td>
                         <td>{{course.created_at}}</td>
-                        <td><a href="">Remove</a></td>
+                        <td><a href="{{course.description_id}}/remove">Remove</a></td>
                     </tr>
                     {% endfor %}
                 </tbody>

@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from apps.loginReg.models import *
+import bcrypt
+from .models import User
 
 def index(request):
+    if 'loggedIn' not in request.session:
+        request.session['loggedIn'] = False
     return render(request, 'loginReg/index.html')
 
 def register(request):
@@ -13,20 +16,43 @@ def register(request):
         if errors:
             for error in errors:
                 messages.error(request, error)
-
             return redirect('loginReg:index')
-        else:
-            password = registeringUser['passwordReg']
-            pwhash = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
-            User.objects.create(
-                first_name=registeringUser['first_name'],
-                last_name=registeringUser['last_name'],
-                email=registeringUser['emailReg'],
-                pwhash=pwhash
-            )
+        
+        User.objects.createUser(registeringUser)
+        request.session['firstName'] = registeringUser['first_name']
+        request.session['loggedIn'] = True
+        
+        return redirect('loginReg:success')
 
     else:
+        print('redirecting as GET method')
         return redirect('loginReg:index')
 
 def login(request):
+    if request.method == 'POST':
+        loginAttemptInfo = request.POST
+        errors = User.objects.loginValidate(loginAttemptInfo)
+
+        if errors:
+            for error in errors:
+                messages.error(request, error)
+            return redirect('loginReg:index')
+        else:
+            if User.objects.attemptLogin(loginAttemptInfo):
+                user = User.objects.get(email=loginAttemptInfo['emailLogin'])
+                request.session['loggedIn'] = True
+                request.session['userid'] = user.id
+                return redirect('loginReg:success')
+            else:
+                error = "We have encountered a problem"
+                messages.error(request, error)
+                return redirect('loginReg:index')
+    else:
+        return redirect('loginReg:index')
+
+def success(request):
+    return render(request, 'loginReg/success.html')
+
+def logout(request):
+    request.session['loggedIn'] = False
     return redirect('loginReg:index')

@@ -9,6 +9,22 @@
     <link rel="stylesheet" href="{% static 'products/css/main.css' %}">
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <p class="navbar-brand">LoginReg</p>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'loginReg:index' %}">Home<span class="sr-only">(current)</span></a>
+            </ul>
+            {% if request.session.loggedIn == True %}
+            <a href="{% url 'loginReg:logout' %}" >Logout</a>
+            {% endif %}
+        </div>
+    </nav>
     <div class="container">
         <h1>Login and Registration</h1>
         <div class="row">
@@ -36,7 +52,7 @@
                     <div class="form-group">
                         <label for="confPassword">confPassword</label>
 
-                        <input type="text" class="form-control" name="confpassword">
+                        <input type="text" class="form-control" name="confPassword">
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Register" class="btn btn-primary">
@@ -50,16 +66,22 @@
                 <form action="{% url 'loginReg:login' %}" method="post">
                     <div class="form-group">
                         <label for="emailLogin">emailLogin</label>
-
-                        <input type="text" class="form-control" name="log-email">
+                        <input type="text" class="form-control" name="emailLogin" id="emailLogin">
                     </div>    
                     <div class="form-group">
                         <label for="pwLogin">pwLogin</label>
-                        <input type="password" class="form-control" name="pwLogin">
+                        <input type="password" class="form-control" name="pwLogin" id="pwLogin">
                     </div> 
                     <input type="submit" class="btn btn-primary float-right" Value="Login">
                     {% csrf_token %}
                 </form>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
             </div>
         </div>
     </div>

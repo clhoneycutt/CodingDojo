@@ -8,7 +8,7 @@ def index(request):
         request.session['loggedIn'] = False
     return render(request, 'loginReg/index.html')
 
-def register(request):
+def create(request):
     if request.method == 'POST':
         registeringUser = request.POST
         errors = User.objects.regValidate(registeringUser)

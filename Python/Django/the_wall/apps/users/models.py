@@ -44,7 +44,6 @@ class UserManager(models.Manager):
             errors.append("Please confirm your password.")
         if postData['confPassword'] != postData['passwordReg']:
             errors.append("Your passwords must match.")
-        print(errors)
         return errors
 
     def loginValidate(self, postData):
@@ -67,22 +66,18 @@ class UserManager(models.Manager):
         
         return errors
 
-    def attemptLogin(self, postData):
+    def pwcheck(self, postData):
         email = postData['emailLogin']
         user = User.objects.get(email=email)
         password = postData['pwLogin']
-
         pwCheck = bcrypt.checkpw(password.encode(), user.pwhash.encode())
-        print(pwCheck)
         if pwCheck:
             return True
         else:
             return False
         
-
-
-    
-    def createUser(self, postData):
+    def createUser(self, registeringUser):
+        password = registeringUser['passwordReg']
         pwhash = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
         User.objects.create(
             first_name=registeringUser['first_name'],
@@ -90,13 +85,6 @@ class UserManager(models.Manager):
             email=registeringUser['emailReg'],
             pwhash=pwhash
         )
-        
-    def pwCheck(self, user, password):
-        if bcrypt.checkpw(password.encode(), user.pwhash.encode()):
-            return True
-        else:
-            return False
-        
 
 
 

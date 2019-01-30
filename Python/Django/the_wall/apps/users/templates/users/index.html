@@ -3,15 +3,15 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Login and Registration</title>
+    <title>The Wall Login</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     {% load static %}
-    <link rel="stylesheet" href="{% static 'products/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'users/css/main.css' %}">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <p class="navbar-brand">The Wall</p>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <p class="navbar-brand">The Wall Login</p>
+        <button class="navbar-toggler" type="button" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         
@@ -40,19 +40,19 @@
                         <input type="text" class="form-control" name="last_name" placeholder="last name">
                     </div>
                     <div class="form-group">
-                        <label for="emailReg">emailReg</label>
+                        <label for="emailReg">Email: </label>
 
                         <input type="text" class="form-control" name="emailReg" placeholder="email">
                     </div>
                     <div class="form-group">
-                        <label for="passwordReg">passwordReg</label>
+                        <label for="passwordReg">Password: </label>
 
-                        <input type="text" class="form-control" name="passwordReg">
+                        <input type="password" class="form-control" name="passwordReg">
                     </div>
                     <div class="form-group">
-                        <label for="confPassword">confPassword</label>
+                        <label for="confPassword">Confirm Password: </label>
 
-                        <input type="text" class="form-control" name="confPassword">
+                        <input type="password" class="form-control" name="confPassword">
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Register" class="btn btn-primary">
@@ -65,11 +65,11 @@
                 <h2>Login</h2>
                 <form action="{% url 'main:login' %}" method="post">
                     <div class="form-group">
-                        <label for="emailLogin">emailLogin</label>
+                        <label for="emailLogin">Email:</label>
                         <input type="text" class="form-control" name="emailLogin" id="emailLogin">
                     </div>    
                     <div class="form-group">
-                        <label for="pwLogin">pwLogin</label>
+                        <label for="pwLogin">Password:</label>
                         <input type="password" class="form-control" name="pwLogin" id="pwLogin">
                     </div> 
                     <input type="submit" class="btn btn-primary float-right" Value="Login">

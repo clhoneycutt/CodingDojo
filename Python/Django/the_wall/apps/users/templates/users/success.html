@@ -18,10 +18,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="{% url 'loginReg:index' %}">Home<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{% url 'main:index' %}">Home<span class="sr-only">(current)</span></a>
                 </ul>
                 {% if request.session.loggedIn == True %}
-                <a href="{% url 'loginReg:logout' %}" >Logout</a>
+                <a href="{% url 'main:logout' %}" >Logout</a>
                 {% endif %}
             </div>
         </nav>

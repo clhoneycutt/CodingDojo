@@ -6,7 +6,7 @@ from .models import User
 def index(request):
     if 'loggedIn' not in request.session:
         request.session['loggedIn'] = False
-    return render(request, 'loginReg/index.html')
+    return render(request, 'users/index.html')
 
 def create(request):
     if request.method == 'POST':
@@ -16,43 +16,43 @@ def create(request):
         if errors:
             for error in errors:
                 messages.error(request, error)
-            return redirect('loginReg:index')
+            return redirect('main:index')
         
         User.objects.createUser(registeringUser)
         request.session['firstName'] = registeringUser['first_name']
         request.session['loggedIn'] = True
         
-        return redirect('loginReg:success')
+        return redirect('main:success')
 
     else:
         print('redirecting as GET method')
-        return redirect('loginReg:index')
+        return redirect('main:index')
 
 def login(request):
     if request.method == 'POST':
-        loginAttemptInfo = request.POST
-        errors = User.objects.loginValidate(loginAttemptInfo)
+        userInfo = request.POST
+        errors = User.objects.loginValidate(userInfo)
 
         if errors:
             for error in errors:
                 messages.error(request, error)
-            return redirect('loginReg:index')
+            return redirect('main:index')
         else:
-            if User.objects.attemptLogin(loginAttemptInfo):
-                user = User.objects.get(email=loginAttemptInfo['emailLogin'])
+            if User.objects.pwcheck(userInfo):
+                user = User.objects.get(email=userInfo['emailLogin'])
                 request.session['loggedIn'] = True
                 request.session['userid'] = user.id
-                return redirect('loginReg:success')
+                return redirect('main:success')
             else:
                 error = "We have encountered a problem"
                 messages.error(request, error)
-                return redirect('loginReg:index')
+                return redirect('main:index')
     else:
-        return redirect('loginReg:index')
+        return redirect('main:index')
 
 def success(request):
-    return render(request, 'loginReg/success.html')
+    return render(request, 'users/success.html')
 
 def logout(request):
     request.session.flush()
-    return redirect('loginReg:index')
+    return redirect('main:index')

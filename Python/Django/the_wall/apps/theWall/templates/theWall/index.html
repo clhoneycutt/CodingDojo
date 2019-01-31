@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>The Wall Login</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'theWall/css/main.css' %}">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.bundle.min.js" integrity="sha384-zDnhMsjVZfS3hiP7oCBRmfjkQC4fzxVxFhBx8Hkz2aZX8gEvA/jsP3eXRCvzTofP" crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <p class="navbar-brand">The Wall</p>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'thewall:index' %}">Home</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mr-auto">
+                <li class="greeting nav-item text-light">Hello, {{request.session.first_name}}</li>
+                <li class="nav-item active"><a class="nav-link" href="{% url 'main:logout' %}">Logout</a></li>
+            </ul>
+    </nav>
+    <div class="container">
+        <div class="post_message">
+            <h1>Post a message</h1>
+            <form action="{% url 'thewall:postMessage' %}" method="POST">
+                <textarea name="post_message" id="post_message" class="form-control"></textarea>
+                <input type="hidden" name="userid" value="{{request.session.userid}}">
+                <button class="btn btn-primary">Post a message</button>
+                {% csrf_token %}
+            </form>
+        </div>
+        <div class="messages">
+            {% for message in Messages.objects.displayMessages %}
+                <p>{{message}}</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

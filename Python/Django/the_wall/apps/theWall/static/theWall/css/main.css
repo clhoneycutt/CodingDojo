@@ -1,0 +1,10 @@
+.greeting{
+    margin-right: 100px;
+}
+textarea{
+    resize: none;
+}
+.post_message button{
+    float: right;
+    margin-top: 15px;
+}

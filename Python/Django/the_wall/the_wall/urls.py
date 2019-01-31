@@ -17,7 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^', include('apps.users.urls', namespace="main")),
-    # url(r'^thewall', include('apps.theWall.urls', namespace="thewall")),
+    url(r'^thewall/', include('apps.theWall.urls', namespace="thewall")),
     url(r'^admin/', admin.site.urls),
+    url(r'^', include('apps.users.urls', namespace="main")),
 ]

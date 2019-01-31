@@ -6,27 +6,29 @@
     <title>Login or Register Success</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     {% load static %}
-    <link rel="stylesheet" href="{% static 'products/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'users/css/main.css' %}">
 </head>
 <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <p class="navbar-brand">LoginReg</p>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-                
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{% url 'main:index' %}">Home<span class="sr-only">(current)</span></a>
-                </ul>
-                {% if request.session.loggedIn == True %}
-                <a href="{% url 'main:logout' %}" >Logout</a>
-                {% endif %}
-            </div>
-        </nav>
-    <h1>Success! Welcome {{request.session.firstName}}</h1>
-    <p class="text-success">Successfull register (or logged in)!</p>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <p class="navbar-brand">The Wall</p>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+            
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'thewall:index' %}">Home</a>
+                </li>
+            </ul>
+            {% if request.session.loggedIn == True %}
+            <a href="{% url 'main:logout' %}" >Logout</a>
+            {% endif %}
+        </div>
+    </nav>
+    <div class="container success">
+        <h1>Success! Welcome {{request.session.first_name}}</h1>
+    </div>
     
 </body>
 </html>

@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-import bcrypt
 from .models import User
+import bcrypt
+
 
 def index(request):
     if 'loggedIn' not in request.session:
@@ -42,6 +43,7 @@ def login(request):
                 user = User.objects.get(email=userInfo['emailLogin'])
                 request.session['loggedIn'] = True
                 request.session['userid'] = user.id
+                request.session['first_name'] = user.first_name
                 return redirect('main:success')
             else:
                 error = "We have encountered a problem"

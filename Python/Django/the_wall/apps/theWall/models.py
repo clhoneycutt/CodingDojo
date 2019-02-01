@@ -12,17 +12,26 @@ class messageManager(models.Manager):
 
         return errors
     
-    def addMessage(self, messageInfo, userid):
-        userid = User.objects.get(id=userid)
+    def addMessage(self, messageInfo):
+        user = User.objects.get(id=messageInfo['userid'])
+        message = messageInfo['post_message']
         newMessage = self.create(
-            userid = userid,
-            message = messageInfo['post_message']
+            user = user,
+            message = message
             )
-        return
+        newMessage.save()
+        return True
     
-    def displayMessages(self, userid):
-        allMessages = self.filter(userid=userid)
-        return allMessages
+    def displayMessages(self):
+        allMessages = self.all().values()
+        displayMessages = []
+        for message in allMessages:
+            
+            displayMessages.append({
+                'message': message,
+                'user': User.objects.filter(id=allMessages[0]['user_id']).values()
+            })
+        return displayMessages
 
 
 

@@ -4,8 +4,11 @@ from .models import Message, Comment
 def index(request):
     if not request.session['loggedIn']:
         return redirect('main:index')
+    context = {
+    'messages': Message.objects.displayMessages()
+    }
 
-    return render(request, 'theWall/index.html')
+    return render(request, 'theWall/index.html', context)
 
 def post_message(request):
     if not request.session['loggedIn']:
@@ -20,7 +23,7 @@ def post_message(request):
             return redirect('thewall:index')
 
         userid = request.session['userid']
-        Message.objects.addMessage(messageInfo, userid)
+        Message.objects.addMessage(messageInfo)
         return redirect('thewall:index')
     else:
         return redirect('thewall:index')

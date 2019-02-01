@@ -22,6 +22,7 @@ def create(request):
         User.objects.createUser(registeringUser)
         request.session['firstName'] = registeringUser['first_name']
         request.session['loggedIn'] = True
+        request.session['userid'] = User.objects.get(registeringUser['userid'])
         
         return redirect('main:success')
 

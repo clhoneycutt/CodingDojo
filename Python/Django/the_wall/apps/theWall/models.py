@@ -27,15 +27,15 @@ class messageManager(models.Manager):
 
 
 class Message(models.Model):
-    userid = models.ForeignKey(User)
+    user = models.ForeignKey(User, related_name="messages")
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = messageManager()
 
 class Comment(models.Model):
-    message = models.ForeignKey(Message,related_name="comment")
-    userid = models.ForeignKey(User, related_name="comment")
+    message = models.ForeignKey(Message, related_name="comments")
+    user = models.ForeignKey(User, related_name="comments")
     comment = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

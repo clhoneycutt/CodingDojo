@@ -7,7 +7,7 @@ def index(request):
 
     return render(request, 'theWall/index.html')
 
-def postMessage(request):
+def post_message(request):
     if not request.session['loggedIn']:
         return redirect('main:index')
     

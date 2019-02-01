@@ -25,7 +25,7 @@
     <div class="container">
         <div class="post_message">
             <h1>Post a message</h1>
-            <form action="{% url 'thewall:postMessage' %}" method="POST">
+            <form action="{% url 'thewall:post_message' %}" method="POST">
                 <textarea name="post_message" id="post_message" class="form-control"></textarea>
                 <input type="hidden" name="userid" value="{{request.session.userid}}">
                 <button class="btn btn-primary">Post a message</button>

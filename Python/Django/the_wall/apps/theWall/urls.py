@@ -8,6 +8,6 @@ urlpatterns = [
     # url(r'^(?P<userid>\d+)/show/', views.show, name="show"),
     # url(r'^(?P<userid>\d+)/update/', views.update, name="update"),
     # url(r'^(?P<userid>\d+)/destroy/', views.destroy, name="destroy"),
-    url(r'^post_message', views.postMessage, name="postMessage"),
-    url(r'^', views.index, name="index"),
+    url(r'^post_message/', views.post_message, name="post_message"),
+    url(r'^/', views.index, name="index"),
 ]

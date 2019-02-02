@@ -9,20 +9,18 @@
     <link rel="stylesheet" href="{% static 'users/css/main.css' %}">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <p class="navbar-brand">The Wall</p>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+        <a class="navbar-brand" href="{% url 'thewall:index' %}">The Wall</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-            
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        
+        <div class="collapse navbar-collapse" id="navbarsExample02">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'thewall:index' %}">Home</a>
-                </li>
+
             </ul>
-            {% if request.session.loggedIn == True %}
-            <a href="{% url 'main:logout' %}" >Logout</a>
+            {% if request.session.loggedIn %}
+                <a class="d-inline my-2 my-md-0" href="{% url 'main:logout' %}">Logout</a>
             {% endif %}
         </div>
     </nav>

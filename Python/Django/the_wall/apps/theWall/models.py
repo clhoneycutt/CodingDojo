@@ -27,7 +27,7 @@ class commentManager(models.Manager):
         errors = []
 
         if len(commentInfo['post_comment']) < 1:
-            errors.append("Message cannot be blank")
+            errors.append("Comment cannot be blank")
 
         return errors
 

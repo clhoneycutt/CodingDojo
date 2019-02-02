@@ -8,13 +8,18 @@ textarea{
     float: right;
     margin-top: 15px;
 }
-.messages{
+.border{
     margin-top: 75px;
 }
-.messages h5{
+.border h5{
     display: inline;
 }
-.message{
+.allMessages{
+    border: 1px solid black;
+    margin-bottom: 25px;
+    padding: 10px 0px 50px 10px;
+}
+.indivMessage{
     margin: 0px 0px 25px 25px;
 }
 
@@ -29,5 +34,5 @@ textarea{
 }
 .post_comment button{
     float: right;
-    margin-top: 15px;
+    margin: 15px 15px 0px 0px;
 }

@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from .models import Message, Comment
 
 def index(request):
@@ -6,7 +7,7 @@ def index(request):
         request.session['loggedIn'] = False
         return redirect('main:index')
     context = {
-    'messages': Message.objects.all().order_by("-created_at")
+    'allMessages': Message.objects.all().order_by("-created_at")
     }
     return render(request, 'theWall/index.html', context)
 
@@ -33,6 +34,7 @@ def post_comment(request):
     if not request.session['loggedIn']:
         request.session['loggedIn'] = False
         return redirect('main:index')
+
     if request.method == 'POST':
         commentInfo = request.POST
         errors = Comment.objects.validateComment(commentInfo)

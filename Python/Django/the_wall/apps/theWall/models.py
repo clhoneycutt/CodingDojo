@@ -13,25 +13,31 @@ class messageManager(models.Manager):
         return errors
     
     def addMessage(self, messageInfo):
-        user = User.objects.get(id=messageInfo['userid'])
-        message = messageInfo['post_message']
         newMessage = self.create(
-            user = user,
-            message = message
+            user = User.objects.get(id=messageInfo['userid']),
+            message = messageInfo['post_message']
             )
         newMessage.save()
-        return True
-    
-    def displayMessages(self):
-        allMessages = self.all().values()
-        displayMessages = []
-        for message in allMessages:
-            
-            displayMessages.append({
-                'message': message,
-                'user': User.objects.filter(id=allMessages[0]['user_id']).values()
-            })
-        return displayMessages
+        return
+
+class commentManager(models.Manager):
+
+    def validateComment(self, commentInfo):
+
+        errors = []
+
+        if len(commentInfo['post_comment']) < 1:
+            errors.append("Message cannot be blank")
+
+        return errors
+
+    def addComment(self, commentInfo):
+        newComment = self.create(
+            message = Message.objects.get(id=commentInfo['messageid']),
+            user = User.objects.get(id=commentInfo['userid']),
+            comment = commentInfo['post_comment']
+        )
+        return
 
 
 
@@ -48,3 +54,4 @@ class Comment(models.Model):
     comment = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    objects = commentManager()

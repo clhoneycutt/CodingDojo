@@ -3,11 +3,10 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>The Wall Login</title>
+    <title>The Wall</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     {% load static %}
     <link rel="stylesheet" href="{% static 'theWall/css/main.css' %}">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.bundle.min.js" integrity="sha384-zDnhMsjVZfS3hiP7oCBRmfjkQC4fzxVxFhBx8Hkz2aZX8gEvA/jsP3eXRCvzTofP" crossorigin="anonymous"></script>
 </head>
 <body>
     <nav class="navbar navbar-dark bg-dark">
@@ -23,6 +22,8 @@
             </ul>
     </nav>
     <div class="container">
+       
+       
         <div class="post_message">
             <h1>Post a message</h1>
             <form action="{% url 'thewall:post_message' %}" method="POST">
@@ -32,10 +33,39 @@
                 {% csrf_token %}
             </form>
         </div>
+        
+        
         <div class="messages">
-            
-                <p>{{messages}}</p>
-                <p></p><br><br>
+                {% for message in messages %}
+                    <h5>{{message.user.first_name}} {{message.user.last_name}} - </h5>
+                    <h5>posted: {{message.created_at}}</h5>
+                    <div class="message">
+                        <p>{{message.message}}</p><br><br>
+                    </div>
+                    
+                    
+                    <div class="comments">
+                        {% for comment in message.comments.all %}
+                            <h5>{{comment.user.first_name}} {{comment.user.last_name}} - </h5>
+                            <h5>Posted: {{comment.created_at}}</h5>
+                            <div class="comment">
+                                <p>{{comment.comment}}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+
+                    <div class="post_comment">
+                            <h6>Post a comment</h6>
+                            <form action="{% url 'thewall:post_comment' %}" method="POST">
+                                <textarea name="post_comment" id="post_comment" class="form-control"></textarea>
+                                <button class="btn btn-primary">Post a comment</button>
+                                <input type="hidden" name="userid" value="{{request.session.userid}}">
+                                <input type="hidden" name="messageid" value="{{message.id}}">
+                                {% csrf_token %}
+                            </form>
+                    </div>
+                {% endfor %}
             
         </div>
     </div>

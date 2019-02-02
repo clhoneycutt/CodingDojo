@@ -20,9 +20,10 @@ def create(request):
             return redirect('main:index')
         
         User.objects.createUser(registeringUser)
-        request.session['firstName'] = registeringUser['first_name']
+        createdUser = User.objects.last()
         request.session['loggedIn'] = True
-        request.session['userid'] = User.objects.get(registeringUser['userid'])
+        request.session['userid'] = createdUser.id
+        request.session['firstName'] = createdUser.first_name
         
         return redirect('main:success')
 
@@ -57,5 +58,6 @@ def success(request):
     return render(request, 'users/success.html')
 
 def logout(request):
-    request.session.flush()
+    if request.session:
+        request.session.flush()
     return redirect('main:index')

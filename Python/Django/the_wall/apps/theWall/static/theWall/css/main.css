@@ -1,6 +1,6 @@
-.greeting{
-    margin-right: 100px;
-}
+/* *{
+    outline: 1px solid red;
+} */
 textarea{
     resize: none;
 }
@@ -10,4 +10,24 @@ textarea{
 }
 .messages{
     margin-top: 75px;
+}
+.messages h5{
+    display: inline;
+}
+.message{
+    margin: 0px 0px 25px 25px;
+}
+
+.comments{
+    margin: 0px 0px 25px 50px;
+}
+.comments p{
+    display: inline;
+}
+.post_comment{
+    margin: 0px 0px 25px 50px;
+}
+.post_comment button{
+    float: right;
+    margin-top: 15px;
 }

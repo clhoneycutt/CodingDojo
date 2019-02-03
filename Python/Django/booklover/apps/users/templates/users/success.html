@@ -11,7 +11,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand navbar-dark bg-dark">
-        <a class="navbar-brand" href="{% url 'books:index' %}">Book Lover</a>
+        <a class="navbar-brand" href="">Book Lover</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -19,7 +19,7 @@
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active"><a class="nav-link" href="{% url 'books:index' %}">Home</a></li>
-                <li class="nav-item active"><a class="nav-link">Welcome, This Guy</a></li>
+                <li class="nav-item active"><a class="nav-link">Welcome, {{request.session.first_name}}</a></li>
             </ul>
             <a class="d-inline my-2 my-md-0 add text-white" href="{% url 'books:new' %}">Add Book and Review</a>
             {% if request.session.loggedIn %}

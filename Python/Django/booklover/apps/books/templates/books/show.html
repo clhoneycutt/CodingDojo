@@ -19,7 +19,7 @@
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active"><a class="nav-link" href="{% url 'books:index' %}">Home</a></li>
-                <li class="nav-item active"><a class="nav-link">Welcome, This Guy</a></li>
+                <li class="nav-item active"><a class="nav-link">Welcome, {{request.session.first_name}}</a></li>
             </ul>
             <a class="d-inline my-2 my-md-0 add text-white" href="{% url 'books:new' %}">Add Book and Review</a>
             {% if request.session.loggedIn %}
@@ -30,38 +30,28 @@
     
     
     <div class="container col-11">
-        <div class="books d-inline-block">
-            <h4>Book Numero Uno</h4>
-            <h6>Author: Captain Planet</h6>
+        <div class="book d-inline-block">
+            <h4>{{book.title}}</h4>
+            <h6>Author: {{book.author.name}}</h6>
+            <h5>Reviews:</h5>
             <hr>
-            <div class="reviews">
-                <p>This is the first book</p>
-                <p>stars: <img src="" alt=""></p>
-                <a href="{% url 'main:show' %}" class="d-inline">This Guy</a>
-                <p class="d-inline"> says some stuff about the book.says some stuff about the booksays some stuff about the booksays some stuff about the booksays some stuff about the booksays some stuff about the book</p>
-                <p>Posted on Taco Tuesday</p>
+            {% for review in reviews %}
+            <div class="review">
+                <p class="d-inline">Rating: {{review.rating}} Stars</p>
+                {% if review.reviewer.id == request.session.userid %}
+                    <p class="d-inline"><a href="{% url 'books:destroy' review.book.id review.id %}">Delete Review</a></p>
+                {% endif %}
+                <p class="">
+                    <a href="{% url 'main:show' review.reviewer.id %}" class="d-inline">{{review.reviewer.first_name}}</a> says "{{review.review}}"
+                </p>
+                <p>Posted on {{review.created_at}}</p>
             </div>
             <hr>
-            <div class="reviews">
-                <p>This is the first book</p>
-                <p>stars: <img src="" alt=""></p>
-                <a href="{% url 'main:show' %}" class="d-inline">This Guy</a>
-                <p class="d-inline"> says some stuff about the book.says some stuff about the booksays some stuff about the booksays some stuff about the booksays some stuff about the booksays some stuff about the book</p>
-                <p>Posted on Taco Tuesday</p>
-            </div>
-            <hr>
-            <div class="reviews">
-                <p>This is the first book</p>
-                <p>stars: <img src="" alt=""></p>
-                <a href="{% url 'main:show' %}" class="d-inline">This Guy</a>
-                <p class="d-inline"> says some stuff about the book.says some stuff about the booksays some stuff about the booksays some stuff about the booksays some stuff about the booksays some stuff about the book</p>
-                <p>Posted on Taco Tuesday</p>
-            </div>
-            <hr>
+            {% endfor %}
         </div>
         <div class="addreview d-inline-block">
             <h5>Other Books with Reviews:</h5>
-            <form action="">
+            <form action="{% url 'books:addReview' bookid %}" method="POST">
                 <div class="form-group">
                     <label for="review">Add a Review:</label>
                     <textarea name="review" id="review" class="form-control"></textarea>
@@ -78,9 +68,17 @@
                     <p class="d-inline">stars</p>
                 </div>
                 <div class="form-group float-right">
-                    <button type="button" class="btn btn-outline-dark">Submit Review</button>
+                    <button type="submit" class="btn btn-outline-dark">Submit Review</button>
                 </div>
+                {% csrf_token %}
             </form>
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
         </div>
     </div>
 </body>

@@ -1,11 +1,11 @@
 /* *{
     outline: 1px solid red;
 } */
-.books{
+.book{
     width: 45%;
     margin: 50px 50px 0px 0px;
 }
-.books h6{
+.book h6{
     margin-left: 10px;
 }
 .addreview{
@@ -13,6 +13,6 @@
     vertical-align: top;
     margin-top: 100px;
 }
-.reviews *{
+.review *{
     margin-left: 25px;
 }

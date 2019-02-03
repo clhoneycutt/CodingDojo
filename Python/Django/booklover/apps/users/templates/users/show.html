@@ -18,25 +18,22 @@
         
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
-                <li class="text-light">Welcome, This Guy</li>
+                <li class="text-light">Welcome, {{request.session.first_name}}</li>
                 <!-- <a class="nav-link" href="#">Link</a> -->
             </ul>
             <a class="d-inline my-2 my-md-0 add text-white" href="{% url 'books:new' %}">Add Book and Review</a>
-            {% if request.session.loggedIn %}
-                <a class="d-inline my-2 my-md-0 text-white" href="{% url 'main:logout' %}">Logout</a>
-            {% endif %}
+            <a class="d-inline my-2 my-md-0 text-white" href="{% url 'main:logout' %}">Logout</a>
         </div>
     </nav>
     <div class="container">
-        <h4>User Alias: This Guy</h4>
-        <p>Name: This Guy</p>
-        <p>email: test@test.com</p>
-        <p>Total Reviews: lots</p>
+        <h4>Name: {{user.first_name}} {{user.last_name}}</h4>
+        <p>email: {{user.email}}</p>
+        <p>Total Reviews: {{user.reviews.count}}</p>
         <h5>Posted Reviews on the following books:</h5>
         <ul>
-            <li><a href="">all</a></li>
-            <li><a href="">all</a></li>
-            <li><a href="">all</a></li>
+            {% for review in reviews %}
+            <li><a href="{% url 'books:show' review.book.id %}">{{review.book.title}}</a></li>
+            {% endfor %}
         </ul>
     </div>
 </body>

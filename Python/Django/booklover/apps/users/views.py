@@ -70,7 +70,7 @@ def login(request):
                 request.session['first_name'] = user.first_name
                 return redirect('main:success')
             else:
-                error = "We have encountered a problem"
+                error = "We have encountered a problem logging you in"
                 messages.error(request, error)
                 return redirect('main:index')
     else:
@@ -78,6 +78,12 @@ def login(request):
 
 
 def success(request):
+    if 'loggedIn' not in request.session:
+        request.session['loggedIn'] = False
+        return redirect('main:index')
+    if not request.session['loggedIn']:
+        return redirect('main:index')
+
     return render(request, 'users/success.html')
 
 

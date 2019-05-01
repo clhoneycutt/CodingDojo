@@ -1,0 +1,22 @@
+@model Dish
+
+<div class="offset-2 col-8">
+    <div>
+        <a href="/">Home</a>
+    </div>
+    <div class="text-center">
+        <h1>@Model.Name</h1>
+        <p>@Model.Chef</p>
+        <hr>
+    </div>
+    <div>
+        <p>@Model.Description</p>
+        <p>Calories: @Model.Calories</p>
+        <p>Tastiness: @Model.Tastiness</p>
+    </div>
+    <div class="d-flex justify-content-between offset-4 col-4 mt-5">
+        <a href="/@Model.DishID/delete" class="btn btn-outline-danger">Delete</a>
+        <a href="/@Model.DishID/edit" class="btn btn-outline-dark">Edit</a>
+    </div>
+
+</div>

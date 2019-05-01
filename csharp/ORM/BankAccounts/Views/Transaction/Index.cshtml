@@ -1,0 +1,45 @@
+@model AccountView
+
+<div class="row">
+    <div class="col text-left">
+        <h4>Welcome, @ViewBag.FirstName</h4>
+        
+    </div>
+    <div class="col d-flex">
+        <p>Current Balance</p>
+        <span class="ml-5 border px-5 pt-2">@ViewBag.Balance</span>
+    </div>
+    <a href="logout" class="text-right">Logout</a>
+</div>
+
+<div class="row my-5 ml-2">
+    <form asp-action="transact" asp-controller="Transaction" method="POST">
+        <div class="form-group d-inline">
+            <label asp-for="Transaction.Amount" class="mr-5">Deposit/Withdrawal</label>
+            
+            <input asp-for="Transaction.Amount" class="form-group d-inline">
+        </div>
+        <button type="submit" class="btn btn-outline-dark ml-5">Submit</button>
+    </form>
+    <span asp-validation-for="Transaction.Amount" class="ml-5"></span>
+</div>
+
+<div class="row">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Amount</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var transaction in Model.Transactions)
+            {
+                <tr>
+                    <td>@transaction.Amount</td>
+                    <td>@transaction.CreatedAt</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

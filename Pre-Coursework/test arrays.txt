@@ -1,4 +1,0 @@
-["word","words","food","food","worods","wooooooooooooooords"]
-
-[15, 5, 77, -84, -32, 64, 45, 15, 125]
-[125, 5, 45, -84, -32, 64, 77, 15, 15]

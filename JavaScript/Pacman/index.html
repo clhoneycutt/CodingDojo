@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pacman</title>
+    <style type="text/css">
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        body{
+            background-color: black;
+        }
+        div.row div{
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+        }
+        div.brick{
+            background-color: blue;
+        }
+        div.coin{
+            background-image: url('coin.gif');
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        div.empty{
+            
+        }
+        div.pacman{
+            background-image: url('pacman.gif');
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="world"></div>
+    
+    <script>
+        var x = 10;
+        var y = 10;
+
+        var world = [
+            [2,2,2,2,2,2,2,2,2,2],
+            [2,9,1,1,1,1,1,1,1,2],
+            [2,1,1,1,1,1,1,1,1,2],
+            [2,1,1,1,1,1,1,1,1,2],
+            [2,1,1,1,1,1,1,1,1,2],
+            [2,1,1,1,1,1,1,1,1,2],
+            [2,1,1,1,1,1,1,1,1,2],
+            [2,1,1,1,1,1,1,1,1,2],
+            [2,1,1,1,1,1,1,1,1,2],
+            [2,2,2,2,2,2,2,2,2,2],
+        ];
+
+        function displayWorld(){
+            var output = '';
+
+            for (var i=0;i<world.length;i++){
+                output += "\n\t<div class='row'>"
+                for(var j=0;j<world[i].length;j++){
+                    if(world[i][j] == 2)
+                        output += "\n\t\t<div class='brick'></div>";
+                    if(world[i][j] == 1)
+                        output += "\n\t\t<div class='coin'></div>";
+                    if(world[i][j] == 0)
+                        output += "\n\t\t<div class='empty'></div>";
+                    if(world[i][j] == 9)
+                        output += "\n\t\t<div class='pacman'></div>";
+                }
+                output += "\n\t</div>"
+            }
+            document.getElementById('world').innerHTML = output;
+        }
+        displayWorld()
+    </script>
+</body>
+</html>

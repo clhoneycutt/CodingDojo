@@ -7,16 +7,20 @@
     <title>Pacman</title>
     <style type="text/css">
         *{
-            margin: 0px;
-            padding: 0px;
+            margin: 0;
+            padding: 0;
         }
         body{
             background-color: black;
         }
         div.row div{
+            margin: 0px;
             width: 20px;
             height: 20px;
             display: inline-block;
+        }
+        div.row{
+            height: 20px;
         }
         div.brick{
             background-color: blue;
@@ -29,16 +33,23 @@
         div.empty{
             
         }
-        div.pacman{
+        div#pacman{
             background-image: url('pacman.gif');
             background-repeat: no-repeat;
             background-position: center;
+            width: 20px;
+            height: 20px;
+            position: absolute;
         }
+
     </style>
 </head>
 <body>
     
-    <div id="world"></div>
+    <div class="container">
+        <div id="world"></div>
+        <div id="pacman" style='top: 20px; left: 20px;'></div>
+    </div>
     
     <script>
         var x = 10;
@@ -46,13 +57,13 @@
 
         var world = [
             [2,2,2,2,2,2,2,2,2,2],
-            [2,9,1,1,1,1,1,1,1,2],
+            [2,1,2,1,1,1,1,1,1,2],
+            [2,1,2,1,2,2,2,1,1,2],
+            [2,1,2,1,2,1,2,1,1,2],
             [2,1,1,1,1,1,1,1,1,2],
-            [2,1,1,1,1,1,1,1,1,2],
-            [2,1,1,1,1,1,1,1,1,2],
-            [2,1,1,1,1,1,1,1,1,2],
-            [2,1,1,1,1,1,1,1,1,2],
-            [2,1,1,1,1,1,1,1,1,2],
+            [2,1,2,1,2,1,2,1,1,2],
+            [2,1,2,1,2,1,2,1,1,2],
+            [2,1,2,1,2,2,2,1,1,2],
             [2,1,1,1,1,1,1,1,1,2],
             [2,2,2,2,2,2,2,2,2,2],
         ];
@@ -61,22 +72,27 @@
             var output = '';
 
             for (var i=0;i<world.length;i++){
-                output += "\n\t<div class='row'>"
+                output += "\n<div class='row'>\n";
                 for(var j=0;j<world[i].length;j++){
-                    if(world[i][j] == 2)
-                        output += "\n\t\t<div class='brick'></div>";
-                    if(world[i][j] == 1)
-                        output += "\n\t\t<div class='coin'></div>";
-                    if(world[i][j] == 0)
-                        output += "\n\t\t<div class='empty'></div>";
-                    if(world[i][j] == 9)
-                        output += "\n\t\t<div class='pacman'></div>";
+                    if(world[i][j] == 2){
+                        output += "<div class='brick'></div>";
+                    }
+                    if(world[i][j] == 1){
+                        output += "<div class='coin'></div>";
+                    }
+                    if(world[i][j] == 0){
+                        output += "<div class='empty'></div>";
+                    }
                 }
-                output += "\n\t</div>"
+                output += "</div>\n";
             }
             document.getElementById('world').innerHTML = output;
         }
-        displayWorld()
+        displayWorld();
+
+        document.onkeydown = function(e){
+            
+        }
     </script>
 </body>
 </html>

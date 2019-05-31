@@ -34,12 +34,12 @@
             
         }
         div#pacman{
+            background-color: black;
             background-image: url('pacman.gif');
             background-repeat: no-repeat;
             background-position: center;
             width: 20px;
             height: 20px;
-            position: absolute;
         }
 
     </style>
@@ -47,51 +47,117 @@
 <body>
     
     <div class="container">
-        <div id="world"></div>
-        <div id="pacman" style='top: 20px; left: 20px;'></div>
+        <div id="gameBoard"></div>
     </div>
     
     <script>
-        var x = 10;
-        var y = 10;
 
-        var world = [
-            [2,2,2,2,2,2,2,2,2,2],
-            [2,1,2,1,1,1,1,1,1,2],
-            [2,1,2,1,2,2,2,1,1,2],
-            [2,1,2,1,2,1,2,1,1,2],
-            [2,1,1,1,1,1,1,1,1,2],
-            [2,1,2,1,2,1,2,1,1,2],
-            [2,1,2,1,2,1,2,1,1,2],
-            [2,1,2,1,2,2,2,1,1,2],
-            [2,1,1,1,1,1,1,1,1,2],
-            [2,2,2,2,2,2,2,2,2,2],
-        ];
+        // Set pacman and game board variables if not already set.
 
-        function displayWorld(){
+        if(!pacman){
+            var pacman = {
+                x: 1,
+                y: 1
+            };
+        }
+        var gameBoard = [];
+
+        if(gameBoard.length < 1){
+            var gameBoard = [
+                [2,2,2,2,2,2,2,2,2,2],
+                [2,1,2,1,1,1,1,1,1,2],
+                [2,1,2,1,2,2,2,1,1,2],
+                [2,1,2,1,2,1,2,1,1,2],
+                [2,1,1,1,1,1,1,1,1,2],
+                [2,1,2,1,2,1,2,1,1,2],
+                [2,1,2,1,2,1,2,1,1,2],
+                [2,1,2,1,2,2,2,1,1,2],
+                [2,1,1,1,1,1,1,1,1,2],
+                [2,2,2,2,2,2,2,2,2,2],
+            ];
+        }
+        
+        // Legend for the gameboard
+
+        var gameBoardDict = {
+            0: 'empty',
+            1: 'coin',
+            2: 'brick',
+            9: 'pacman'
+        };
+
+        // Function to create the Game Board
+
+        function displayGameBoard(){
             var output = '';
 
-            for (var i=0;i<world.length;i++){
+            for (var row=0;row<gameBoard.length;row++){
                 output += "\n<div class='row'>\n";
-                for(var j=0;j<world[i].length;j++){
-                    if(world[i][j] == 2){
-                        output += "<div class='brick'></div>";
+                for(var col=0;col<gameBoard[row].length;col++){
+                    if(gameBoard[row][col] == 9){
+                        output += "<div id='" +
+                            gameBoardDict[gameBoard[row][col]] +
+                            "'></div>"
                     }
-                    if(world[i][j] == 1){
-                        output += "<div class='coin'></div>";
-                    }
-                    if(world[i][j] == 0){
-                        output += "<div class='empty'></div>";
+                    else{
+                        output += "<div class ='" + 
+                            gameBoardDict[gameBoard[row][col]] + 
+                            "'></div>"
                     }
                 }
-                output += "</div>\n";
+                output += "\n</div>";
             }
-            document.getElementById('world').innerHTML = output;
+            document.getElementById('gameBoard').innerHTML = output;
         }
-        displayWorld();
 
-        document.onkeydown = function(e){
-            
+        // Function to display Pacman, which runs the gameboard display
+
+        function displayPacman(){
+            gameBoard[pacman.x][pacman.y] = 9;
+            displayGameBoard();
+        }
+        
+        
+        displayPacman();
+
+        // Key Press Events
+
+        document.onkeypress = function(e){
+            var oldPacmanCoord = {
+                x: 0,
+                y: 0
+            };
+
+            // Left Key
+            if(e.keyCode == 37){
+
+                if(gameBoard[pacman.x-1][pacman.y] == 2){
+                    console.log(gameBoard[pacman.x][pacman.y]);
+                }else{
+                    oldPacmanCoord.x = pacman.x;
+                    pacman.x -= 1;
+                    if(gameBoard[oldPacmanCoord.x][y] == 1){
+                        gameBoard[x][y] = 0;
+                    }
+                }
+            }
+
+            // Up Key
+            else if(e.keyCode == 38){
+
+            }
+            else if(e.keyCode == 39){
+
+            }
+            else if(e.keyCode == 40){
+                oldPacmanCoord.x = pacman.x;
+                if(gameBoard[pacman.x+1][pacman.y] == 2){ break; }
+                else{
+                    pacman.x += 1;
+                }
+                
+            }
+            displayGameBoard();
         }
     </script>
 </body>

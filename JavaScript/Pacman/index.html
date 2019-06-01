@@ -60,20 +60,25 @@
                 y: 1
             };
         }
+
         var gameBoard = [];
 
         if(gameBoard.length < 1){
-            var gameBoard = [
-                [2,2,2,2,2,2,2,2,2,2],
-                [2,1,2,1,1,1,1,1,1,2],
-                [2,1,2,1,2,2,2,1,1,2],
-                [2,1,2,1,2,1,2,1,1,2],
-                [2,1,1,1,1,1,1,1,1,2],
-                [2,1,2,1,2,1,2,1,1,2],
-                [2,1,2,1,2,1,2,1,1,2],
-                [2,1,2,1,2,2,2,1,1,2],
-                [2,1,1,1,1,1,1,1,1,2],
-                [2,2,2,2,2,2,2,2,2,2],
+            gameBoard = [
+                [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
+                [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+                [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+                [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+                [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+                [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+                [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+                [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+                [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+                [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+                [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+                [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+                [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+                [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
             ];
         }
         
@@ -120,45 +125,48 @@
         
         displayPacman();
 
+
+        // TODO
+        // Don't allow pacman to move into walls
+        // Remove old pacman when pacman moves
+        // Add coins to score
+        // display game over when there are no more coins
+
         // Key Press Events
+        // Each key press:
+        // - check to verify new space is not a wall
+        // - move pacman coords
+        // - replace old pacman coords with an empty space
 
-        document.onkeypress = function(e){
-            var oldPacmanCoord = {
-                x: 0,
-                y: 0
-            };
-
+        document.onkeydown = function(e){
+            var oldPacman = {
+                x: pacman.x,
+                y: pacman.y
+            }
+        
             // Left Key
-            if(e.keyCode == 37){
-
-                if(gameBoard[pacman.x-1][pacman.y] == 2){
-                    console.log(gameBoard[pacman.x][pacman.y]);
-                }else{
-                    oldPacmanCoord.x = pacman.x;
-                    pacman.x -= 1;
-                    if(gameBoard[oldPacmanCoord.x][y] == 1){
-                        gameBoard[x][y] = 0;
-                    }
-                }
+            if(e.keyCode == 37 && gameBoard[pacman.x][pacman.y-1] != 2){
+                pacman.y -= 1;
+                gameBoard[oldPacman.x][oldPacman.y] = 0;
             }
-
+            // Right Key
+            else if(e.keyCode == 39 && gameBoard[pacman.x][pacman.y+1] != 2){
+                pacman.y += 1;
+                gameBoard[oldPacman.x][oldPacman.y] = 0;
+            }
             // Up Key
-            else if(e.keyCode == 38){
-
+            else if(e.keyCode == 38 && gameBoard[pacman.x-1][pacman.y] != 2){
+                pacman.x -= 1;
+                gameBoard[oldPacman.x][oldPacman.y] = 0;
             }
-            else if(e.keyCode == 39){
-
+            // Down Key
+            else if(e.keyCode == 40 && gameBoard[pacman.x+1][pacman.y] != 2){
+                pacman.x += 1;
+                gameBoard[oldPacman.x][oldPacman.y] = 0;
             }
-            else if(e.keyCode == 40){
-                oldPacmanCoord.x = pacman.x;
-                if(gameBoard[pacman.x+1][pacman.y] == 2){ break; }
-                else{
-                    pacman.x += 1;
-                }
-                
-            }
-            displayGameBoard();
+            displayPacman();
         }
+
     </script>
 </body>
 </html>

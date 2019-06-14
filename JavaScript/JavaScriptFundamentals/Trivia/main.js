@@ -1,5 +1,5 @@
 $(function() {
-            
+    
     const categories = {
         10 : "Entertainment: Books",
         11 : "Entertainment: Film",
@@ -31,8 +31,7 @@ $(function() {
 
     // TODO
     // Generate three categories
-    // Each Category should have 3 questions. one each easy, medium and hard 
-
+    // Each Category should have 3 questions. one each of: easy, medium and hard 
 
     
     // 
@@ -48,7 +47,6 @@ $(function() {
     // -> repeat until all questions answered
     // -> show new questions button
     
-    var $categoryOne = $('cat1')
     
     // Technical experience
     // New Questions
@@ -58,19 +56,50 @@ $(function() {
     // -> Question selected
     // -> update HTML in this question i.e id=cat2-q2
     // -> 
-    
-    $.ajax({
-        url: "https://opentdb.com/api.php?\
-            amount=3&\
-            category=21&\
-            difficulty=easy&\
-            type=multiple",
-        success: function(data) {
-            $.each(data.results, function(i, result) {
+    var $categoryOne = document.getElementById('cat1');
+    var $categoryTwo = document.getElementById('cat2');
+    var $categoryThree = document.getElementById('cat3');
 
+    function threeCategories() {
+        var limit = 3,
+            lower_bound = 10,
+            upper_bound = 33,
+            unique_random_numbers = [];
+
+        while (unique_random_numbers.length < limit) {
+            var random_number = Math.floor(Math.random()*(upper_bound - lower_bound) + lower_bound);
+            if (unique_random_numbers.indexOf(random_number) == -1) { 
+                unique_random_numbers.push( random_number );
+            }
+        }
+        return unique_random_numbers;
+    }
+
+    var currentCategories = threeCategories();
+    var difficulties = [
+        'easy',
+        'medium',
+        'hard'
+    ]
+
+        
+    for (var i=1;i<currentCategories.length+1;i++){
+        for (var j=1;j<difficulties.length+1;j++){
+            $.ajax({
+                url: "https://opentdb.com/api.php?\
+                    amount=1&\
+                    category=" + currentCategories[i] + "&\
+                    difficulty=" + difficulties[j] + "&\
+                    type=multiple",
+                success: function(data) {
+                    var $questionDiv = "cat" + i + "-q" + j;
+                    var $thisQuestion = document.getElementById($questionDiv);
+                    console.log($questionDiv);
+                    console.log($thisQuestion);
+                }
             })
         }
-    })
+    }
 
 
 

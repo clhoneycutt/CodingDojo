@@ -51,21 +51,21 @@ $(function() {
     // Technical experience
     // New Questions
     // -> 3 random categories selected
-    // -> 9 Ajax requests for 3 categories with 3 questions each of varying difficulty
-    // -> Create hidden p tag
-    // -> Question selected
-    // -> update HTML in this question i.e id=cat2-q2
+    // -> question-box clicked
+    // -> points div selected
+    // -> question div selected
+    // -> question div searched for category and question
+    // -> points variable created
+    // -> ajax call created / sent
+    // -> points div hidden, questions div unhidden
     // -> 
-    var $categoryOne = document.getElementById('cat1');
-    var $categoryTwo = document.getElementById('cat2');
-    var $categoryThree = document.getElementById('cat3');
-
+    
     function threeCategories() {
         var limit = 3,
             lower_bound = 10,
             upper_bound = 33,
             unique_random_numbers = [];
-
+            
         while (unique_random_numbers.length < limit) {
             var random_number = Math.floor(Math.random()*(upper_bound - lower_bound) + lower_bound);
             if (unique_random_numbers.indexOf(random_number) == -1) { 
@@ -74,36 +74,86 @@ $(function() {
         }
         return unique_random_numbers;
     }
+    
+    // Generate 3 categories and set the category names
 
-    var currentCategories = threeCategories();
-    var difficulties = [
-        'easy',
-        'medium',
-        'hard'
-    ]
-
+    const setCategoryNames = () => {
+        var currentCategories = threeCategories();
         
-    for (var i=1;i<currentCategories.length+1;i++){
-        for (var j=1;j<difficulties.length+1;j++){
-            $.ajax({
-                url: "https://opentdb.com/api.php?\
-                    amount=1&\
-                    category=" + currentCategories[i] + "&\
-                    difficulty=" + difficulties[j] + "&\
-                    type=multiple",
-                success: function(data) {
-                    var $questionDiv = "cat" + i + "-q" + j;
-                    var $thisQuestion = document.getElementById($questionDiv);
-                    console.log($questionDiv);
-                    console.log($thisQuestion);
-                }
-            })
-        }
+        let [categoryOne, categoryTwo, categoryThree] = currentCategories;
+        
+        let $categoryOne = document.getElementById('cat1-name');
+        let $categoryTwo = document.getElementById('cat2-name');
+        let $categoryThree = document.getElementById('cat3-name');
+        
+        // $categoryOne.innerHTML = categories[categoryOne]
+        // $categoryTwo.innerHTML = categories[categoryTwo]
+        // $categoryThree.innerHTML = categories[categoryThree]
+
+        return currentCategories;
     }
+    
+
+    let currentCategories = setCategoryNames();
+    let [categoryOne, categoryTwo, categoryThree] = currentCategories;
 
 
+    $(".question-box").click(function(){
+        var points_id = $(this).children('.points');
+        var question_id = $(this).children('.question');
 
+        if((question_id.get(0).id).includes('cat1')){
+            var category = categoryOne;
+        }else if((question_id.get(0).id).includes('cat2')){
+            var category = categoryTwo;
+        }else if((question_id.get(0).id).includes('cat3')){
+            var category = categoryThree;
+        }
 
+        if((question_id.get(0).id).includes('q1')){
+            var difficulty = 'easy';
+        }else if((question_id.get(0).id).includes('q2')){
+            var difficulty = 'medium';
+        }else if((question_id.get(0).id).includes('q3')){
+            var difficulty = 'hard';
+        }
 
+               
+        $.ajax({
+            url: "https://opentdb.com/api.php?\
+                amount=1&\
+                category=" + category + "&\
+                difficulty=" + difficulty + "&\
+                type=multiple",
+            success: function(data) {
+                var questionTemplate = "<div id='cat1-q3-question' class='question'>\n"
+                                        + "<p>{data.question}</p>\n"
+                                        + "<div class='form-group ml-3'>\n"
+                                            + "<div class='radio'>\n"
+                                            + "<label><input type='radio' name='cat1-q3-answer'>Option 1</label>\n"
+                                            + "</div>\n"
+                                            + "<div class='radio'>\n"
+                                                + "<label><input type='radio' name='cat1-q3-answer'>Option 2</label>\n"
+                                            + "</div>\n"
+                                            + "<div class='radio disabled'>\n"
+                                                + "<label><input type='radio' name='cat1-q3-answer'>Option 3</label>\n"
+                                            + "</div>\n"
+                                        + "</div>\n"
+                                    + "</div>"
+            }
+        })
+    })
+    
+    // var test = "cat1-q3-question";
+    // var q2 = "q2";
+    // var q3 = "q3";
+    
+    // if (test.includes(q3)){
+    //     console.log('q3 found')
+    // }else{
+    //     console.log('q3 not found')
+    // }
+    
+    
 
 });

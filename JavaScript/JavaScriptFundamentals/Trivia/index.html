@@ -12,6 +12,7 @@
     </script>
 
     <script type="text/javascript" src="./main.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.js"></script>
     <link rel="stylesheet" href="./main.css">
 
     <link 
@@ -42,13 +43,13 @@
 
         <div id="cat-row" class="row mt-5 text-center">
             <div class="col mx-2">
-                <p id="cat1-name" class="cat-name">Geography</p>
+                <p id="cat1-name" class="cat-name"></p>
             </div>
             <div class="col mx-2">
-                <p id="cat2-name" class="cat-name">Entertainment</p>
+                <p id="cat2-name" class="cat-name"></p>
             </div>
             <div class="col mx-2">
-                <p id="cat3-name" class="cat-name">Science</p>
+                <p id="cat3-name" class="cat-name"></p>
             </div>
         </div> <!-- end of categories-row -->
 
@@ -96,21 +97,6 @@
                
                 <div id="cat1-q3-qbox" class="question-box unanswered d-flex flex-column justify-content-between">
                     <p id="cat1-q3-pts" class="mt-3 points hidden">300</p>
-                    <div id="cat1-q3-question" class="question">
-                        <p>This is question 3</p>
-                        <div class="form-group ml-3">
-                            <div class="radio">
-                                <label><input type="radio" name="cat1-q3-answer">Option 1</label>
-                            </div>
-                            <div class="radio">
-                                <label><input type="radio" name="cat1-q3-answer">Option 2</label>
-                            </div>
-                            <div class="radio disabled">
-                                <label><input type="radio" name="cat1-q3-answer">Option 3</label>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
 

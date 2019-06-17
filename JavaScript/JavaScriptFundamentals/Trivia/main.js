@@ -74,6 +74,25 @@ $(function() {
         }
         return unique_random_numbers;
     }
+
+    function shuffle(array) {
+        var currentIndex = array.length, temporaryValue, randomIndex;
+      
+        // While there remain elements to shuffle...
+        while (0 !== currentIndex) {
+      
+          // Pick a remaining element...
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex -= 1;
+      
+          // And swap it with the current element.
+          temporaryValue = array[currentIndex];
+          array[currentIndex] = array[randomIndex];
+          array[randomIndex] = temporaryValue;
+        }
+      
+        return array;
+      }
     
     // Generate 3 categories and set the category names
 
@@ -86,9 +105,9 @@ $(function() {
         let $categoryTwo = document.getElementById('cat2-name');
         let $categoryThree = document.getElementById('cat3-name');
         
-        // $categoryOne.innerHTML = categories[categoryOne]
-        // $categoryTwo.innerHTML = categories[categoryTwo]
-        // $categoryThree.innerHTML = categories[categoryThree]
+        $categoryOne.innerHTML = categories[categoryOne]
+        $categoryTwo.innerHTML = categories[categoryTwo]
+        $categoryThree.innerHTML = categories[categoryThree]
 
         return currentCategories;
     }
@@ -97,27 +116,30 @@ $(function() {
     let currentCategories = setCategoryNames();
     let [categoryOne, categoryTwo, categoryThree] = currentCategories;
 
+    var currentAnswer;
 
     $(".question-box").click(function(){
-        var points_id = $(this).children('.points');
-        var question_id = $(this).children('.question');
+        var points = $(this).children('.points');
+        var question = $(this).children('.question');
+        var question_id = question.get(0).id;
 
-        if((question_id.get(0).id).includes('cat1')){
+        if((question.get(0).id).includes('cat1')){
             var category = categoryOne;
-        }else if((question_id.get(0).id).includes('cat2')){
+        }else if((question.get(0).id).includes('cat2')){
             var category = categoryTwo;
-        }else if((question_id.get(0).id).includes('cat3')){
+        }else if((question.get(0).id).includes('cat3')){
             var category = categoryThree;
         }
 
-        if((question_id.get(0).id).includes('q1')){
+        if((question.get(0).id).includes('q1')){
             var difficulty = 'easy';
-        }else if((question_id.get(0).id).includes('q2')){
+        }else if((question.get(0).id).includes('q2')){
             var difficulty = 'medium';
-        }else if((question_id.get(0).id).includes('q3')){
+        }else if((question.get(0).id).includes('q3')){
             var difficulty = 'hard';
         }
 
+        
                
         $.ajax({
             url: "https://opentdb.com/api.php?\
@@ -126,20 +148,33 @@ $(function() {
                 difficulty=" + difficulty + "&\
                 type=multiple",
             success: function(data) {
-                var questionTemplate = "<div id='cat1-q3-question' class='question'>\n"
-                                        + "<p>{data.question}</p>\n"
+                data = data.results[0];
+
+                window.currentAnswer = data.correct_answer;
+
+                let answerOptions = data.incorrect_answers;
+                answerOptions.push(data.correct_answer)                
+                shuffle(answerOptions);
+
+                
+                var questionTemplate = "<p>{{data.question}}</p>\n"
                                         + "<div class='form-group ml-3'>\n"
                                             + "<div class='radio'>\n"
-                                            + "<label><input type='radio' name='cat1-q3-answer'>Option 1</label>\n"
+                                            + "<label><input type='radio' name='{{question_id}}'>{{answerOptions[0]}}</label>\n"
                                             + "</div>\n"
                                             + "<div class='radio'>\n"
-                                                + "<label><input type='radio' name='cat1-q3-answer'>Option 2</label>\n"
+                                                + "<label><input type='radio' name='{{question_id}}'>{{answerOptions[1]}}</label>\n"
                                             + "</div>\n"
                                             + "<div class='radio disabled'>\n"
-                                                + "<label><input type='radio' name='cat1-q3-answer'>Option 3</label>\n"
+                                                + "<label><input type='radio' name='{{question_id}}'>{{answerOptions[2]}}</label>\n"
                                             + "</div>\n"
-                                        + "</div>\n"
-                                    + "</div>"
+                                            + "<div class='radio disabled'>\n"
+                                                + "<label><input type='radio' name='{{question_id}}'>{{answerOptions[3]}}</label>\n"
+                                            + "</div>\n"
+                                        + "</div>"
+
+                
+                
             }
         })
     })

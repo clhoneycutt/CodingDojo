@@ -1,3 +1,8 @@
+//
+
+
+
+
 $(function() {
     
     const categories = {
@@ -116,26 +121,31 @@ $(function() {
     let currentCategories = setCategoryNames();
     let [categoryOne, categoryTwo, categoryThree] = currentCategories;
 
-    var currentAnswer;
+        // ====Suggestion from FCC discord====
+        //  you can disable the default behaviour from within a event listener, if that is what you are looking for
+        //  myButton.addEventListener("click", e => {
+        //      e.preventDefault()
+        //      do something here
+        //  })
 
     $(".question-box").click(function(){
-        var points = $(this).children('.points');
-        var question = $(this).children('.question');
-        var question_id = question.get(0).id;
+        var pointsBox = $(this).children('.points');
+        var questionBox = $(this).children('.question');
+        var question_id = questionBox.get(0).id;
 
-        if((question.get(0).id).includes('cat1')){
+        if((question_id).includes('cat1')){
             var category = categoryOne;
-        }else if((question.get(0).id).includes('cat2')){
+        }else if((question_id).includes('cat2')){
             var category = categoryTwo;
-        }else if((question.get(0).id).includes('cat3')){
+        }else if((question_id).includes('cat3')){
             var category = categoryThree;
         }
 
-        if((question.get(0).id).includes('q1')){
+        if((question_id).includes('q1')){
             var difficulty = 'easy';
-        }else if((question.get(0).id).includes('q2')){
+        }else if((question_id).includes('q2')){
             var difficulty = 'medium';
-        }else if((question.get(0).id).includes('q3')){
+        }else if((question_id).includes('q3')){
             var difficulty = 'hard';
         }
 
@@ -157,38 +167,36 @@ $(function() {
                 shuffle(answerOptions);
 
                 
-                var questionTemplate = "<p>{{data.question}}</p>\n"
-                                        + "<div class='form-group ml-3'>\n"
+                var questionTemplate = "<p>{{question}}</p>\n"
+                                        + "<div id='{{question_id}}_answers' class='form-group ml-3'>\n"
                                             + "<div class='radio'>\n"
-                                            + "<label><input type='radio' name='{{question_id}}'>{{answerOptions[0]}}</label>\n"
+                                            + "<label><input type='radio' name='{{question_id}}'>{{option_1}}</label>\n"
                                             + "</div>\n"
                                             + "<div class='radio'>\n"
-                                                + "<label><input type='radio' name='{{question_id}}'>{{answerOptions[1]}}</label>\n"
+                                                + "<label><input type='radio' name='{{question_id}}'>{{option_2}}</label>\n"
                                             + "</div>\n"
                                             + "<div class='radio disabled'>\n"
-                                                + "<label><input type='radio' name='{{question_id}}'>{{answerOptions[2]}}</label>\n"
+                                                + "<label><input type='radio' name='{{question_id}}'>{{option_3}}</label>\n"
                                             + "</div>\n"
                                             + "<div class='radio disabled'>\n"
-                                                + "<label><input type='radio' name='{{question_id}}'>{{answerOptions[3]}}</label>\n"
+                                                + "<label><input type='radio' name='{{question_id}}'>{{option_4}}</label>\n"
                                             + "</div>\n"
                                         + "</div>"
 
-                
+                mustacheData = {
+                    question: data.question,
+                    question_id: question_id,
+                    option_1: answerOptions[0],
+                    option_2: answerOptions[1],
+                    option_3: answerOptions[2],
+                    option_4: answerOptions[3]
+                }
+
+                $('#' + question_id).append( Mustache.render(questionTemplate, mustacheData))
+                pointsBox.addClass('hidden');
+                questionBox.removeClass('hidden');
                 
             }
         })
     })
-    
-    // var test = "cat1-q3-question";
-    // var q2 = "q2";
-    // var q3 = "q3";
-    
-    // if (test.includes(q3)){
-    //     console.log('q3 found')
-    // }else{
-    //     console.log('q3 not found')
-    // }
-    
-    
-
 });

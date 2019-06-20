@@ -7,6 +7,7 @@
 /.vscode/
 /.idea/
 /Python/python_OOP/test/
+/wwwroot/
 *.pyc
 
 Migrations/

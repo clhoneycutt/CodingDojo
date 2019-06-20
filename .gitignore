@@ -12,7 +12,7 @@
 
 Migrations/
 /csharp/otherInfo
-/lib/bootstrap
+*./lib/bootstrap
 ###################
 
 # compiled source #

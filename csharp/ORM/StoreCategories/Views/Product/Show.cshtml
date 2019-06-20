@@ -1,0 +1,53 @@
+@model AddCategorytoProductView
+
+<div class="row">
+    <div class="offset-1 col">
+        <div class="text-right">
+            <h4><a href="/products/">Products</a></h4>
+        </div>
+    </div>
+    <div class="col-2">
+        <div class="text-center">
+            <p class="">-or-</p>
+        </div>
+    </div>
+    <div class="col">
+        <div class="text-left">
+            <h4><a href="/">Categories</a></h4>
+        </div>
+    </div>
+</div>
+
+<div class="text-center">
+    <h4 class="display-4">@Model.Product.Name</h4>
+</div>
+
+<div class="row">
+    <div class="offset-1 col text-center">
+        <h4>Products</h4>
+        <ul>
+            @foreach(var category in Model.Categories
+                    .Where(p => p.AssociatedProducts
+                    .Any(pr => pr.ProductID == Model.Product.ProductID)))
+            {
+                <li><a href="/@category.CategoryID">@category.Name</a></li>
+            }
+        </ul>
+    </div>
+    <div class="offset-1 col-1 d-flex justify-content-center"></div>
+    <div class="offset-1 col text-right">
+        <form asp-action="AddCategoryToProduct" asp-controller="Product" method="POST">
+            <div class="form-group text-left">
+                <label for="CategoryID">Add Category</label>
+                <select name="CategoryID" class="form-control">
+                    @foreach(var category in Model.Categories.Where(p => !p.AssociatedProducts.Any(pr => pr.ProductID == Model.Product.ProductID)))
+                    {
+                        <option value="@category.CategoryID">@category.Name</option>
+                    }
+                </select>
+            </div>
+            <input type="hidden" for="ProductID" value="@Model.Product.ProductID">
+            <button type="submit" class="btn btn-outline-dark">Add</button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,6 @@
+@model List<Chef>
+
+@foreach(Chef chef in @Model)
+{
+    <option value="@chef.ChefID">@chef.FirstName @chef.LastName</option>
+}

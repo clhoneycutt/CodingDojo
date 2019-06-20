@@ -1,0 +1,58 @@
+﻿@model IndexViewModel
+
+<div class="row">
+    <div class="col-5">
+        <h4 class="display-4">Register</h4>
+        <form asp-action="register" asp-controller="Home" method="POST">
+            <div class="form-group">
+                <label asp-for="NewUser.FirstName">First Name:</label>
+                <span asp-validation-for="NewUser.FirstName"></span>
+                <input asp-for="NewUser.FirstName" class="form-control">
+            </div>
+            <div class="form-group">
+                <label asp-for="NewUser.LastName">Last Name:</label>
+                <span asp-validation-for="NewUser.LastName"></span>
+                <input asp-for="NewUser.LastName" class="form-control">
+            </div>
+            <div class="form-group">
+                <label asp-for="NewUser.Email">E-mail:</label>
+                <span asp-validation-for="NewUser.Email"></span>
+                <input asp-for="NewUser.Email" class="form-control">
+            </div>
+            <div class="form-group">
+                <label asp-for="NewUser.Password">Password:</label>
+                <span asp-validation-for="NewUser.Password"></span>
+                <input asp-for="NewUser.Password" class="form-control">
+            </div>
+            <div class="form-group">
+                <label asp-for="NewUser.ConfirmPassword">Confirm Password:</label>
+                <span asp-validation-for="NewUser.ConfirmPassword"></span>
+                <input asp-for="NewUser.ConfirmPassword" class="form-control">
+            </div>
+            <div class="text-right">
+                <button type="submit" class="btn btn-outline-dark mt-3">Sign Up</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-3"></div>
+    <div class="col-4">
+        <div class="outline">
+            <h4 class="display-4">Login</h4>
+            <form asp-action="login" asp-controller="Home" method="POST">
+                <div class="form-group">
+                    <label asp-for="User.Email">Email:</label>
+                    <span asp-validation-for="User.Email"></span>
+                    <input asp-for="User.Email" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label asp-for="User.Password">Password:</label>
+                    <span asp-validation-for="User.Password"></span>
+                    <input asp-for="User.Password" class="form-control">
+                </div>
+                <div class="text-right">
+                    <button type="submit" class="btn btn-outline-dark">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

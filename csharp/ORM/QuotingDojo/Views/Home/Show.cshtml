@@ -1,0 +1,11 @@
+@model Entry
+
+<h1 class="display-1 text-center">Here are the awesome quotes!</h1>
+@{
+    foreach (var quote in ViewBag.Quotes)
+    {
+        <p class="quote">@quote["Quote"]</p>
+        <p class="author">-@quote["Name"]</p>
+        <hr>
+    }
+}

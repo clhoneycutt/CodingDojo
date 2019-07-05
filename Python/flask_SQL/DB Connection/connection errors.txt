@@ -1,9 +1,0 @@
-pymysql.err.OperationalError: (1045, "Access denied for user 'rot'@'localhost' (using password: YES)")
-
-fix: fix the username being entered.
-
-===================================
-
-pymysql.err.OperationalError: (2003, "Can't connect to MySQL server on 'loclhost' ([Errno 11001] getaddrinfo failed)")
-
-fix: enter correct hostname / address.

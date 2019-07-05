@@ -7,11 +7,12 @@
 /.vscode/
 /.idea/
 /Python/python_OOP/test/
+/bootstrap/
 *.pyc
 
 Migrations/
 /csharp/otherInfo
-/lib/bootstrap
+lib/bootstrap
 ###################
 
 # compiled source #

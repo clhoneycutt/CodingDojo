@@ -1,0 +1,55 @@
+﻿@model User
+
+<div class="outline col-8 offset-2">
+
+    <div class="text-center">
+        <h4 class="display-4">Enter Your Information</h4>
+    </div>
+
+    <form asp-action="registration" asp-controller="Home" method="post" class="form-group mt-5">
+
+        <table class="table table-borderless">
+            <tbody>
+                
+                <tr>
+                    <td><label asp-for="FirstName">First Name:</label></td>
+                    <td>
+                        <input asp-for="FirstName" class="form-control">
+                        <span asp-validation-for="FirstName"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label asp-for="LastName">Last Name:</label></td>
+                    <td>
+                        <input asp-for="LastName" class="form-control">
+                        <span asp-validation-for="LastName"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label asp-for="Age">Age:</label></td>
+                    <td>
+                        <input asp-for="Age" class="form-control">
+                        <span asp-validation-for="Age"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label asp-for="Email">Email Address:</label></td>
+                    <td>
+                        <input asp-for="Email" class="form-control">
+                        <span asp-validation-for="Email"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="Password">Password:</label></td>
+                    <td>
+                        <input asp-for="Password" class="form-control">
+                        <span asp-validation-for="Password"></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="text-right pr-2">
+            <button type="submit" class="btn btn-outline-dark mt-3">Submit</button>
+        </div>
+    </form>
+</div>

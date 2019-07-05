@@ -124,6 +124,8 @@ TestResults/
 
 *.sqlite
 
+*.sql
+
 # OS generated files #
 
 ######################

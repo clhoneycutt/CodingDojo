@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pacman</title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-color: black;
+        }
+        div.row div{
+            margin: 0px;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+        }
+        div.row{
+            height: 20px;
+        }
+        div.brick{
+            background-color: blue;
+        }
+        div.coin{
+            background-image: url('coin.gif');
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        div.empty{
+            
+        }
+        div#pacman{
+            background-color: black;
+            background-image: url('pacman.gif');
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 20px;
+            height: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <div id="gameBoard"></div>
+    </div>
+    
+    <script>
+
+        // Set pacman and game board variables if not already set.
+
+        if(!pacman){
+            var pacman = {
+                x: 1,
+                y: 1
+            };
+        }
+
+        var gameBoard = [];
+
+        if(gameBoard.length < 1){
+            gameBoard = [
+                [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
+                [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+                [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+                [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+                [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+                [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+                [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+                [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+                [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+                [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+                [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+                [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+                [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+                [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
+            ];
+        }
+        
+        // Legend for the gameboard
+
+        var gameBoardDict = {
+            0: 'empty',
+            1: 'coin',
+            2: 'brick',
+            9: 'pacman'
+        };
+
+        // Function to create the Game Board
+
+        function displayGameBoard(){
+            var output = '';
+
+            for (var row=0;row<gameBoard.length;row++){
+                output += "\n<div class='row'>\n";
+                for(var col=0;col<gameBoard[row].length;col++){
+                    if(gameBoard[row][col] == 9){
+                        output += "<div id='" +
+                            gameBoardDict[gameBoard[row][col]] +
+                            "'></div>"
+                    }
+                    else{
+                        output += "<div class ='" + 
+                            gameBoardDict[gameBoard[row][col]] + 
+                            "'></div>"
+                    }
+                }
+                output += "\n</div>";
+            }
+            document.getElementById('gameBoard').innerHTML = output;
+        }
+
+        // Function to display Pacman, which runs the gameboard display
+
+        function displayPacman(){
+            gameBoard[pacman.x][pacman.y] = 9;
+            displayGameBoard();
+        }
+        
+        
+        displayPacman();
+
+
+        // TODO
+        // Don't allow pacman to move into walls
+        // Remove old pacman when pacman moves
+        // Add coins to score
+        // display game over when there are no more coins
+
+        // Key Press Events
+        // Each key press:
+        // - check to verify new space is not a wall
+        // - move pacman coords
+        // - replace old pacman coords with an empty space
+
+        document.onkeydown = function(e){
+            var oldPacman = {
+                x: pacman.x,
+                y: pacman.y
+            }
+        
+            // Left Key
+            if(e.keyCode == 37 && gameBoard[pacman.x][pacman.y-1] != 2){
+                pacman.y -= 1;
+                gameBoard[oldPacman.x][oldPacman.y] = 0;
+            }
+            // Right Key
+            else if(e.keyCode == 39 && gameBoard[pacman.x][pacman.y+1] != 2){
+                pacman.y += 1;
+                gameBoard[oldPacman.x][oldPacman.y] = 0;
+            }
+            // Up Key
+            else if(e.keyCode == 38 && gameBoard[pacman.x-1][pacman.y] != 2){
+                pacman.x -= 1;
+                gameBoard[oldPacman.x][oldPacman.y] = 0;
+            }
+            // Down Key
+            else if(e.keyCode == 40 && gameBoard[pacman.x+1][pacman.y] != 2){
+                pacman.x += 1;
+                gameBoard[oldPacman.x][oldPacman.y] = 0;
+            }
+            displayPacman();
+        }
+
+    </script>
+</body>
+</html>

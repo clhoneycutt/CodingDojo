@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Dojo Survey</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        *{
+        margin: 0px;
+        padding: 0px;
+        }
+        .container{
+            width: 325px;
+            min-height: 250px;
+            margin: 0px auto;
+            padding: 25px;
+            border: 1px solid black;
+        }
+        .container div{
+            display: inline-block;
+        }
+        .labels{
+            margin-bottom: 10px;
+        }
+        .labels label{
+            display: block;
+            font-size: 18px;
+        }
+        .inputs{
+            float: right;
+        }
+        .inputs select{
+            display: block;
+            margin-bottom: 3px;
+            width: 170px;
+        }
+        .inputs input{
+            display: block;
+            margin-bottom: 3px;
+            width: 166px;
+        }
+        textarea{
+            width: 323px;
+        }
+        button{
+            float: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form action="/success" method="post">
+            <div class ="labels">
+                <label for="name">Your Name:</label>
+                <label for="location">Dojo Location:</label>
+                <label for="favlang">Favorite Language:</label>
+            </div>
+            <div class="inputs">
+                <input type="text" name="name">
+                <select name="location">
+                    <option value="San Jose">San Jose</option>
+                    <option value="Houston">Houston</option>
+                    <option value="Seattle">Seattle</option>
+                    <option value="Chicago">Chicago</option>
+                </select>
+                <select name="favlang">
+                    <option value="Python">Python</option>
+                    <option value="JavaScript">JavaScript</option>
+                    <option value="Csharp">C#</option>
+                    <option value="HTML/CSS">HTML/CSS</option>
+                </select>
+            </div>
+        
+            <label for="comments">Comments(optional):</label>
+            <textarea name="comments" id="" cols="39" rows="10"></textarea>
+            <button>Button!</button>
+        </form>
+    </div>
+    
+</body>
+</html>

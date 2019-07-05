@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Email Validation</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Simple Wall, Inc.</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/success">Admin</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/thewall">The Wall</a>
+                </li>
+            </ul>
+            {% if session['logged_in']: %}
+            <form action="/logout"class="form-inline my-2 my-lg-0">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
+            </form>
+            {% endif %}
+        </div>
+    </nav>
+    <div class="container">
+        {% if session['regmessage']: %}
+            <p class="success">The email address you entered {{ users[length]['email'] }} was able to be registered! Thank you! </p>
+        {% endif %}
+        {% if session['loginmessage']: %}
+            <p class="success">Login Successful!  Welcome back, {{ session['first_name'] }}</p>
+        {% endif %}
+        
+        <h3>Users:</h3>
+        <table class="table table-borderless">
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Created</th>
+            </tr>
+        {% for user in users: %}
+            <tr>
+                <td>{{ user['first_name'] }}</td>
+                <td>{{ user['last_name'] }}</td>
+                <td>{{ user['email'] }}</td>
+                <td>{{ user['created_at']}}</td>
+                <td>
+                    <form action="/accountdelete" method="post">
+                        <input type="hidden" name="id" value="{{ user['id'] }}">
+                        <input type="submit" name="delete" value="Delete" class="btn btn-danger">
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

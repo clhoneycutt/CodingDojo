@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Email Validation</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='success.css') }}">
+</head>
+<body>
+    <div class="container">
+        {% if session['creation']: %}
+            <p class="successmsg">The email address you entered {{ emails[length]['email'] }} is a VALID email address! Thank you! </p>
+        {% endif %}
+        
+        <h3>Email Addresses Entered:</h3>
+        <table class="table table-borderless">
+            <tr>
+                <th>Email</th>
+                <th>Created</th>
+            </tr>
+        {% for email in emails: %}
+            <tr>
+                <td>{{ email['email'] }}</td>
+                <td>{{ email['created_at']}}</td>
+                <td>
+                    <form class="email" action="/delete" method="post">
+                        <input type="hidden" name="id" value="{{ email['id'] }}">
+                        <input type="submit" name="delete" value="Delete" class="btn btn-danger">
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+        <form action="/">
+            <input type="submit" name="back" value="Back" class="float-right btn btn-success">
+        </form>
+    </div>
+</body>
+</html>

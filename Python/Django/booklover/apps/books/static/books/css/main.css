@@ -1,0 +1,19 @@
+/* *{
+    outline: 1px solid red;
+} */
+.recentreviews{
+    width: 45%;
+    margin-right: 50px;
+}
+.otherbooks{
+    width: 45%;
+    vertical-align: top;
+}
+.booklist{
+    overflow-y: scroll;
+    border: 2px solid black;
+    height: 300px;
+}
+.booklist li{
+    list-style-type: none;
+}

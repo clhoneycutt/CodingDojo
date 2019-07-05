@@ -1,0 +1,270 @@
+/* RESET & DEBUG */
+/* ------------------------------------------------------------------------- */
+
+*{
+    margin:0px;
+    padding:0px;
+    /* outline: 1px solid red; */
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+
+
+/* SINGLE ATTRIBUTE CLASSES */
+/* ------------------------------------------------------------------------- */
+
+.ctrtxt{
+    text-align: center;
+}
+.gold{
+    color: gold;
+}
+.black{
+    color: black;
+}
+.inline-block{
+    display: inline-block;
+}
+
+/* CONTAINER */
+/* ------------------------------------------------------------------------- */
+
+#container{
+    width: 970px;
+    min-height: 500px;
+    margin: 0px auto;
+    background-color: rgb(36,80,118);
+    padding: 10px 0px;
+}
+
+/* HEADER */
+/* ------------------------------------------------------------------------- */
+
+
+
+#header img{
+    height: 100px;
+    display: inline-block;
+    margin-right: 145px;
+    margin-left: 10px;
+}
+.searcharea{
+    height:100px;
+    width: 47%;
+    display: inline-block;
+    vertical-align: top;
+}
+.searcharea p {
+    color: white;
+    padding-left: 225px;
+    margin-bottom: 5px;
+    font-size: 13px;
+}
+.searcharea a {
+    color: rgb(161, 141, 29);
+}
+
+.search{
+    background-color: rgb(68,68,68);
+    height: 60px;
+    width: 310px;
+    margin-left: 135px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px;
+}
+.search input[type="textbox"]{
+    height: 35px;
+    width: 175px;
+    margin: 10px 0px 0px 35px;
+    color: silver;
+    border: 2px solid gray;
+    text-align: center;
+    font-size: 12px;
+}
+
+.search input[type="submit"]{
+    background-color: rgb(38,81,117);
+    color: white;
+    height: 35px;
+    width: 45px;
+    border-radius: 5px;
+    margin-left: 5px;
+
+}
+
+
+
+/* NAVBAR */
+/* ------------------------------------------------------------------------- */
+
+
+.navBar ul{
+    background-color: rgb(66,124,173);
+    width: 85%;
+    margin: 0px auto;
+    padding: 10px 15px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px;
+    font-size: 23px;
+}
+.navBar li{
+    display: inline-block;
+}
+.navBar a{
+    color: white;
+    text-decoration: none;
+    margin-left: 35px;
+}
+#farleft{
+    margin-left: 20px;
+}
+
+
+
+/* SIDENAV */
+/* ------------------------------------------------------------------------- */
+
+
+
+.sidenav{
+    width: 200px;
+    display: inline-block;
+    margin: 30px 0px 0px 0px;
+}
+
+ul.sidenavlist{
+    color: white;
+    list-style-type: none;
+    width: 150px;
+    height: 200px;
+    margin: 0px 0px 0px 60px;
+    text-align: center;
+    display: inline-block;
+}
+
+ul.sidenavlist li{
+    margin-bottom: 10px;
+    font-size: 17px;
+}
+
+.sidenavlist a{
+    color: white;
+    
+}
+
+/* CONTENT1 */
+/* ------------------------------------------------------------------------- */
+
+#content1{
+    min-height: 300px;
+    width: 700px;
+    display: inline-block;
+    margin-left: 15px;
+    vertical-align: top;
+}
+
+#intro{
+    color: white;
+    text-align: center;
+    margin: 20px 65px 0px 40px;
+    width: 600px;
+    font-size: 14px;
+}
+
+#content1 ul{
+    list-style-type: none;
+    text-align: center;
+    color: white;
+}
+#content1 li{
+    padding-top: 10px;
+    font-size: 18px;
+    font-style: italic;
+}
+
+
+/* CONTENT2 */
+/* ------------------------------------------------------------------------- */
+
+#content2{
+    min-height: 250px;
+    background-color: white;
+    border-top: 2.5px inset gray;
+}
+
+#content2 a{
+    text-decoration: none;
+    color: rgb(137,186,227);
+}
+
+
+
+.getstart{
+    width: 45%;
+    border-top: 4px solid rgb(115,167,213);
+    margin: 15px 10px 0px 40px;
+    display: inline-block;
+}
+.getstart h3{
+    margin-top: 5px;
+}
+.getstartbody{
+    width: 69%;
+    margin: 10px 0px 0px 25px;
+    font-size: 15px;
+}
+.getstartlist li{
+    margin: 0px 0px 0px 25px;
+    text-align: center;
+    width: 90%;
+}
+
+
+
+.applications{
+    width: 45%;
+    display: inline-block;
+    vertical-align: top;
+    margin: 15px 0px 0px 10px;
+    border-top: 4px solid rgb(115,167,213);
+}
+.applications  h3{
+    margin-top: 5px;
+}
+.appbody{
+    width: 69%;
+    margin: 10px 0px 0px 25px;
+    font-size: 15px;
+}
+.applist li{
+    margin: 0px 0px 0px 25px;
+    text-align: center;
+    width: 90%;
+}
+
+
+
+/* FOOTER */
+/* ------------------------------------------------------------------------- */
+
+#footer{
+    min-height: 50px;
+    color: rgb(137,186,227);
+}
+
+#footer ul{
+    width: 70%;
+    margin: 40px 0px 15px 160px;
+}
+#footer li{
+    display: inline-block;
+    margin-left: 45px;
+}
+#footer a{
+    color: rgb(137,186,277);
+    text-decoration: none;
+}
+#footer p{
+    text-align: center;
+    font-size: 10px;
+}

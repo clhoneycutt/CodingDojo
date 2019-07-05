@@ -1,0 +1,39 @@
+*{
+    /* outline: 1px solid red; */
+}
+body{
+    padding-top: 25px;
+}
+.leftpanel{
+    padding: 50px;
+    display: inline-block;
+    vertical-align: top;
+    width: 48%;
+    min-height: 600px;
+}
+.divider{
+    border-left:1px solid #38546d; 
+    border-right:1px solid #16222c;
+    background-color: black;
+    width: 3px;
+    min-height:500px;
+    display: inline-block;
+}
+.rightpanel{
+    padding: 15px;
+    display: inline-block;
+    vertical-align: top;
+    width: 48%;
+    min-height: 600px;
+}
+.indent{
+    margin-left: 15px;
+}
+.button{
+    margin: 40px 0px 15px 0px;
+}
+.words{
+    min-height: 350px;
+    width: 100%;
+    overflow-y: scroll;
+}

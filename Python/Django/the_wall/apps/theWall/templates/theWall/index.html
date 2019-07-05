@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>The Wall</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'theWall/css/main.css' %}">
+</head>
+<body>
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+        <a class="navbar-brand" href="{% url 'thewall:index' %}">The Wall</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+  
+        <div class="collapse navbar-collapse" id="navbarsExample02">
+            <ul class="navbar-nav mr-auto">
+
+            </ul>
+            {% if request.session.loggedIn %}
+                <a class="d-inline my-2 my-md-0" href="{% url 'main:logout' %}">Logout</a>
+            {% endif %}
+        </div>
+      </nav>
+    <div class="container">
+       
+       
+        <div class="post_message">
+            <h1>Post a message</h1>
+            <form action="{% url 'thewall:post_message' %}" method="POST">
+                <textarea name="post_message" id="post_message" class="form-control"></textarea>
+                <input type="hidden" name="userid" value="{{request.session.userid}}">
+                <button class="btn btn-primary">Post a message</button>
+                {% csrf_token %}
+            </form>
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        
+        
+        <div class="border">
+                {% for message in allMessages %}
+                    <div class="allMessages">
+                        <h5>{{message.user.first_name}} {{message.user.last_name}} - </h5>
+                        <h5>posted: {{message.created_at}}</h5>
+                        <div class="indivMessage">
+                            <p>{{message.message}}</p><br><br>
+                        </div>
+                        
+                        
+                        <div class="comments">
+                            {% for comment in message.comments.all %}
+                                <h5>{{comment.user.first_name}} {{comment.user.last_name}} - </h5>
+                                <h5>Posted: {{comment.created_at}}</h5>
+                                <div class="comment">
+                                    <p>{{comment.comment}}</p>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+
+                        <div class="post_comment">
+                                <h6>Post a comment</h6>
+                                <form action="{% url 'thewall:post_comment' %}" method="POST">
+                                    <textarea name="post_comment" id="post_comment" class="form-control"></textarea>
+                                    <button class="btn btn-primary">Post a comment</button>
+                                    <input type="hidden" name="userid" value="{{request.session.userid}}">
+                                    <input type="hidden" name="messageid" value="{{message.id}}">
+                                    {% csrf_token %}
+                                </form>
+                        </div>
+                    </div>
+                {% endfor %}
+            
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+#body {
+    background-color: black;
+    color: white;
+}
+.cat-name {
+    background-color: orangered;
+    color: gold;
+    padding: 10px 0px;
+    border: 2px solid gold;
+}
+.question-col {
+    min-height: 500px;
+    margin: 20px 5px;
+    padding: 10px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.question-box {
+    margin: 10px 0px;
+    height: 250px;
+    width: 250px;
+    padding: 15px;
+    border: 5px double gold;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.unanswered{
+    background-color: blue;
+}
+
+.answered{
+    background-color: gray;
+}
+
+.hidden{
+    display: none;
+}
+
+.points{
+    font-size: 40px;
+}
+
+.question{
+    font-size: 12px;
+}
+input[type="radio"]{
+    margin: -1px 5px 0px 0px;
+    vertical-align: middle;
+}

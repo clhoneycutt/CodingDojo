@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Show User</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'users/css/show.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="card col-10 col-sm-8 col-md-6 col-lg-4">
+            <div class="card-body">
+                <h1>User {{user.id}}</h1>
+                <p>Full Name: {{user.first_name}} {{user.last_name}}</p>
+                <p>Email: {{user.email}}</p>
+                <p>Created at: {{user.created_at}}</p>
+                <p><a class="btn btn-primary" href="/users/{{user.id}}/edit">Edit</a> <a class="btn btn-primary" href="/users/{{user.id}}/destroy">Delete</a> <a class="btn btn-primary" href="/users">Go Back</a></p>
+            </div>
+        </div>        
+    </div>
+</body>
+</html>

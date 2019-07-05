@@ -1,0 +1,25 @@
+*{
+    /* outline: 1px solid red; */
+}
+input{
+    display: inline-block;
+}
+.container{
+    width: 500px;
+    margin: 0px auto;
+}
+.friendLabels{
+    margin-left: 75px;
+    display: inline-block;
+    color: purple;
+    font-weight: bold;
+}
+.friends{
+    display: inline-block;
+}
+.friends p{
+    margin-left: 75px;
+}
+button{
+    margin-bottom: 50px;
+}

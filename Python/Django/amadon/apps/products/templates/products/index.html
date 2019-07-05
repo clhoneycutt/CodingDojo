@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Amadon</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'products/css/main.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Amadon Store!</h1>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Item</th>
+                    <th>Price</th>
+                    <th>Currently Available</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>{{product.name}}</td>
+                    <td>{{product.price}}</td>
+                    <td>{{product.numAvail}}</td>
+                    <td>
+                        <form action="{% url 'products:purchase' %}" method='POST'>
+                            <label for="numPurchase"></label>
+                            <input class="form-control col-md-5 d-inline-block" type="text" name="numPurchase" id="numPurchase" placeholder="How many would you like?">
+                            <input type="hidden" name="id" id="id" value="{{product.id}}">
+                            <input type="hidden" name="numAvail" id="numAvail" value="{{product.numAvail}}">
+                            <button class="btn btn-success">Buy!</button>
+                            {% csrf_token %}
+                        </form>
+                        {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                            <li {% if message.tags %} class="{{ message.tags }}" {%endif%}>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+</body>
+</html>

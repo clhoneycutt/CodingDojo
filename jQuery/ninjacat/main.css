@@ -1,0 +1,16 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+.container{
+    width: 200px;
+    margin: 50px auto;
+}
+img{
+    display: block;
+    margin-bottom:5px; 
+}
+h1{
+    width: 575px;
+    margin: 0px auto;
+}

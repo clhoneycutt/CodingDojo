@@ -1,0 +1,42 @@
+@model NewCategoryView
+
+<div class="row">
+    <div class="offset-1 col">
+        <div class="text-right">
+            <h4><a href="/products/">Products</a></h4>
+        </div>
+    </div>
+    <div class="col-2">
+        <div class="text-center">
+            <p class="">-or-</p>
+        </div>
+    </div>
+    <div class="col">
+        <div class="text-left">
+            <h4>Categories</h4>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="offset-1 col">
+        <h4 class="mb-5">New Category</h4>
+        <form asp-action="newcategory" asp-controller="Home" method="POST">
+            <div class="form-group">
+                <label asp-for="Category.Name" class="d-block">Name</label>
+                <span asp-validation-for="Category.Name"></span>
+                <input asp-for="Category.Name" class="form-control">
+            </div>
+            <div class="text-right">
+                <button type="submit" class="btn btn-outline-dark">Create</button>
+            </div>
+        </form>
+    </div>
+    <div class="VerticalLine offset-1 col-1 d-flex justify-content-center"></div>
+    <div class="col">
+        <h4 class="text-right mb-5">Existing Categories</h4>
+        @foreach(var cat in Model.Categories)
+        {
+            <a href="/@cat.CategoryID" class="d-block text-right">@cat.Name</a>
+        }
+    </div>
+</div>
